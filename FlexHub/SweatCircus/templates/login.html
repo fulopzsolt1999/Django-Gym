@@ -1,0 +1,17 @@
+{% extends "home.html" %} {% block content %}
+<div id="login">
+   <h1 class="text-center">Bejelentkezés</h1>
+   <form>
+      <div class="mb-3">
+         <label for="email" class="form-label">Email address</label>
+         <input type="email" class="form-control" id="email" />
+      </div>
+      <div class="mb-3">
+         <label for="password" class="form-label">Password</label>
+         <input type="password" class="form-control" id="password" />
+      </div>
+      <a class="btn btn-primary" href="premium-pump">Belépés</a>
+      <a class="mx-4" href="">Még nem vagy regisztrálva? Katt ide.</a>
+   </form>
+</div>
+{% endblock %}
