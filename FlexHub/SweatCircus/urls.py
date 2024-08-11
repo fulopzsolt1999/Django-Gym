@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import MainPage, BudgetBiceps, PremiumPump, Signup, CustomLoginView
+from .views import MainPage, GymSearch, PremiumPump, Signup, CustomLoginView
 
 urlpatterns = [
     path('', MainPage, name="FlexHub"),
-    path('budget-biceps/', BudgetBiceps, name="BudgetBiceps"),
+    path('gym-search/', GymSearch, name="GymSearch"),
     path('premium-pump/', PremiumPump, name="PremiumPump"),
     path('signup/', Signup, name="Signup"),
-    path('login/', CustomLoginView.as_view(), name="Login"),
+    path('login/', CustomLoginView.as_view(), name="Login")
 ]
