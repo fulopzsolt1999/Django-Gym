@@ -1,1 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
+/* ××××× Color variables ××××× */
+:root {
+   --primary-bg: #0d1b2a;
+   --secondary-bg: #1b263b;
+   --accent: #415a77;
+   --primary-text: #ffffff;
+   --secondary-text: #c0c0c0;
+   --highlight: #00e7c9;
+}
+
+/* ××××× General styles ××××× */
+body {
+   background-color: var(--primary-bg);
+   color: var(--primary-text);
+   font-family: "Roboto", sans-serif;
+   line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+   font-family: "Montserrat", sans-serif;
+}
+
+p {
+   text-align: justify;
+}
+
+nav {
+   background-color: var(--secondary-text);
+}
+
+nav ul {
+   position: absolute;
+   right: 5rem;
+}
+
+nav li {
+   background-color: var(--accent);
+   margin: 0 1rem;
+}
+
+nav li:hover {
+   background-color: var(--highlight);
+}
+
+/* ××××× About us section styles ××××× */
+
+section {
+   background-color: var(--secondary-bg);
+   border-radius: 16px;
+}
+
+#about-us-title,
+#about-project-title {
+   border-bottom: var(--highlight) solid 5px;
+}
+
+#about-us-imgs {
+   display: flex;
+   justify-content: space-evenly;
+}
+
+#about-us-text {
+   font-size: 18px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.card {
+   width: 11rem;
+   border: var(--accent) solid 1px;
+}
+
+img {
+   height: 15rem;
+}
+
+.card-body {
+   background-color: var(--secondary-text);
+}
+
+/* ××××× About project section styles ××××× */
+#about-project-text {
+   font-size: 18px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+/* ××××× Footer styles ××××× */
+
+footer {
+   width: 100%;
+   position: relative;
+   bottom: 0;
+   background-color: var(--secondary-text);
+   color: #0d1b2a;
+}

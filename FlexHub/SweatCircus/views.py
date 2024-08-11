@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView
 def MainPage(request):
    return render(request, "home.html")
 
-def BudgetBiceps(request):
+def GymSearch(request):
    return render(request, "budgetBiceps.html")
 
 def PremiumPump(request):
