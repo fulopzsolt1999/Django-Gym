@@ -16,20 +16,21 @@ from django.urls import reverse
  """
 
 class GymAddress(models.Model):
+   name = models.CharField(max_length=250, default="")
    city = models.CharField(max_length=250)
    street = models.CharField(max_length=250)
-   street_number = models.IntegerField()
+   street_number = models.CharField(max_length=50)
    
    class Meta:
       verbose_name_plural = 'Edzőtermek címe'
 
    def __str__(self):
-       return self.city, self.street
+      template = '{0.name} {0.city} {0.street}'
+      return template.format(self)
    
 
 class Gym(models.Model):
-   name = models.CharField(max_length=250)
-   address = models.ForeignKey(GymAddress, on_delete=models.CASCADE)
+   name = models.ForeignKey(GymAddress, on_delete=models.CASCADE)
    url = models.URLField()
    price_group = models.CharField(max_length=25)
    comment = models.CharField(max_length=500)
@@ -41,4 +42,5 @@ class Gym(models.Model):
       return reverse('article-detail', kwargs={"pk": self.pk})
 
    def __str__(self):
-      return self.name
+      template = '{0.name}'
+      return template.format(self)
