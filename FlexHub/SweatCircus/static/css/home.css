@@ -13,6 +13,7 @@
 
 /* ××××× General styles ××××× */
 body {
+   height: 100vh;
    background-color: var(--primary-bg);
    color: var(--primary-text);
    font-family: "Roboto", sans-serif;
@@ -30,25 +31,42 @@ p {
    text-align: justify;
 }
 
-nav {
+.navbar {
    background-color: var(--secondary-text);
 }
 
-nav ul {
+.navbar-brand {
+   width: 20rem;
+}
+
+.navbar-nav {
    position: absolute;
-   right: 5rem;
+   right: 3rem;
+   display: flex;
+   flex-direction: row;
+   gap: 1rem;
 }
 
-nav li {
+.nav-item {
    background-color: var(--accent);
-   margin: 0 1rem;
+   transition: background-color 0.3s ease;
+   border-radius: 10px;
 }
 
-nav li:hover {
+.nav-link {
+   text-decoration: none;
+   color: var(--primary-text);
+}
+
+.nav-item:hover {
    background-color: var(--highlight);
 }
 
 /* ××××× About us section styles ××××× */
+
+.container {
+   margin-bottom: 2.65rem;
+}
 
 section {
    background-color: var(--secondary-bg);
@@ -97,8 +115,6 @@ img {
 
 footer {
    width: 100%;
-   position: relative;
-   bottom: 0;
    background-color: var(--secondary-text);
    color: #0d1b2a;
 }

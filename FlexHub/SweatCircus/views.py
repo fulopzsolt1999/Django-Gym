@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
+from .models import City, GymAddress, Gym 
 
 def MainPage(request):
    return render(request, "home.html")
 
 def GymSearch(request):
-   return render(request, "budgetBiceps.html")
+   allGymData = Gym.objects.all()
+   return render(request, "budgetBiceps.html", {"allGymData": allGymData})
 
 def PremiumPump(request):
    return render(request, "premiumPump.html")
