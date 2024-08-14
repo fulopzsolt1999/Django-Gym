@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
-from .models import City, GymAddress, Gym 
+from .models import City, GymAddress, Gym, BodyGoals, User
+import bcrypt
 
 def MainPage(request):
    return render(request, "home.html")
@@ -14,14 +15,25 @@ def PremiumPump(request):
    return render(request, "premiumPump.html")
 
 def Signup(request):
+   bodyGoals = BodyGoals.objects.all()
    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("login")
+      email = request.POST.get("email")
+      hashedPW = bcrypt.hashpw(request.POST.get("password").encode("utf-8"), bcrypt.gensalt())
+      name = request.POST.get("name")
+      weight = request.POST.get("weight")
+      height = request.POST.get("height")
+      body_goals = request.POST.get("goal")
+      comment = request.POST.get("comment") if request.POST.get("comment") else "-"
+      for goal in bodyGoals:
+         if goal.name == body_goals:
+            body_goals = goal
+      if all([email, hashedPW, name, weight, height, body_goals, comment]):
+         newUser = User(email=email, password=hashedPW, name=name, weight=weight, height=height, body_goals=body_goals, comment=comment)
+         newUser.save()
+      return redirect("Login")
    else:
-        form = UserCreationForm()
-   return render(request, "signup.html", {"form": form})
+      return render(request, "signup.html", {"bodyGoals": bodyGoals})
+   return render(request, "signup.html")
 
 class CustomLoginView(LoginView):
     template_name = "login.html"

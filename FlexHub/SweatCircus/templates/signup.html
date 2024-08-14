@@ -1,40 +1,42 @@
-{% extends "home.html" %} {% block content %}
+{% extends "home.html" %} 
+{% block css %}
+<link rel="stylesheet" href="../static/css/signup.css" />
+{% endblock css %} {% block content %}
 <div id="registration">
    <h1 class="text-center">Regisztráció</h1>
    <form method="post">
+      {% csrf_token %}
       <div class="mb-3">
          <label for="email" class="form-label">Email address</label>
-         <input type="email" class="form-control" id="email" required />
+         <input type="email" class="form-control" id="email" name="email" required />
       </div>
       <div class="mb-3">
          <label for="password" class="form-label">Jelszó</label>
-         <input type="password" class="form-control" id="password" required />
+         <input type="password" class="form-control" id="password" name="password" required />
       <div class="mb-3">
          <label for="name" class="form-label">Név</label>
-         <input type="text" class="form-control" id="name" required />
+         <input type="text" class="form-control" id="name" name="name" required />
       </div>
       <div class="mb-3">
          <label for="weight" class="form-label">Súly (kg)</label>
-         <input type="number" class="form-control" id="weight" required />
+         <input type="number" class="form-control" id="weight" name="weight" required />
       </div>
       <div class="mb-3">
          <label for="height" class="form-label">Magasság (cm)</label>
-         <input type="number" class="form-control" id="height" required />
+         <input type="number" class="form-control" id="height" name="height" required />
       </div>
       <div class="form-group mb-3">
          <label class="form-label" for="goal">Cél</label>
-         <select class="form-control" id="goal" required>
-           <option>Izom építés</option>
-           <option>Erő növelés</option>
-           <option>Fogyás</option>
-           <option>Egészség fentartás</option>
+         <select class="form-control" id="goal" name="goal" required>
+            {% for goal in bodyGoals %}
+               <option>{{ goal }}</option>
+            {% endfor %}
          </select>
        </div>
        <div class="form-group mb-3">
          <label class="form-label" for="comment">Megjegyzés (nem kötelező)</label>
-         <textarea class="form-control" id="comment" rows="3"></textarea>
+         <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
        </div>
-      <a type="submit" class="btn btn-primary">Regisztráció</a>
+      <button type="submit" class="btn btn-primary">Regisztráció</button>
    </form>
-</div>
-{% endblock %}
+</div> {% endblock content %}

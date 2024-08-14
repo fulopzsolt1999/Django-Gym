@@ -31,7 +31,7 @@ class City(models.Model):
       return template.format(self)
 
 class GymAddress(models.Model):
-   city_name = models.ForeignKey(City, on_delete=models.CASCADE, default="")
+   city_name = models.ForeignKey(City, on_delete=models.CASCADE, default="-")
    street = models.CharField(max_length=250)
    street_number = models.CharField(max_length=50)
    
@@ -45,7 +45,7 @@ class GymAddress(models.Model):
 
 class Gym(models.Model):
    name = models.CharField(max_length=250)
-   address = models.ForeignKey(GymAddress, on_delete=models.CASCADE, default="")
+   address = models.ForeignKey(GymAddress, on_delete=models.CASCADE, default="-")
    url = models.URLField()
    price_group = models.CharField(max_length=25)
 
@@ -54,6 +54,32 @@ class Gym(models.Model):
 
    def get_absolute_url(self):
       return reverse('article-detail', kwargs={"pk": self.pk})
+
+   def __str__(self):
+      template = '{0.name}'
+      return template.format(self)
+   
+class BodyGoals(models.Model):
+   name = models.CharField(max_length=250)
+
+   class Meta:
+      verbose_name_plural = 'Célok'
+
+   def __str__(self):
+      template = '{0.name}'
+      return template.format(self)
+
+class User(models.Model):
+   email = models.EmailField(max_length=250)
+   password = models.CharField(max_length=250)
+   name = models.CharField(max_length=250)
+   weight = models.IntegerField()
+   height = models.IntegerField()
+   body_goals = models.ForeignKey(BodyGoals, on_delete=models.CASCADE, default="-")
+   comment = models.CharField(max_length=250, default="-")
+
+   class Meta:
+      verbose_name_plural = 'Regisztrált felhasználók'
 
    def __str__(self):
       template = '{0.name}'
