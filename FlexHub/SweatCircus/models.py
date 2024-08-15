@@ -76,7 +76,6 @@ class User(models.Model):
    weight = models.IntegerField()
    height = models.IntegerField()
    body_goals = models.ForeignKey(BodyGoals, on_delete=models.CASCADE, default="-")
-   comment = models.CharField(max_length=250, default="-")
 
    class Meta:
       verbose_name_plural = 'Regisztrált felhasználók'
