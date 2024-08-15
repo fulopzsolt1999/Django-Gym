@@ -9,49 +9,34 @@
          rel="stylesheet"
          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
          crossorigin="anonymous" />
-      <link rel="stylesheet" href="../static/css/home.css" />
       {% block css %} {% endblock css %}
+      <link rel="stylesheet" href="../static/css/home.css" />
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <title>FlexHub</title>
    </head>
    <body>
-      <nav class="navbar navbar-expand-lg navbar-light">
-         <a class="navbar-brand ms-5" href="#"><img src="" alt="FlexHub" /></a>
-         <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-         </button>
-         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-               <li class="nav-item px-2">
-                  <a class="nav-link" href="/">Fő oldal</a>
-               </li>
-               <li class="nav-item px-2">
-                  <a class="nav-link" href="/gym-search">Edzőterem kereső</a>
-               </li>
-               <li class="nav-item px-2">
-                  <a class="nav-link" href="/about-us">Rólunk</a>
-               </li>
-               <li class="nav-item px-2">
-                  <a class="nav-link" href="/login">Belépés</a>
-               </li>
-               <!-- Angol, magyar fordítás gomb nyomással -->
-            </ul>
+      {% block content %}
+      <div id="container">
+         {% include 'navbar.html' %}
+         <div class="m-auto" id="home-container">
+            <div id="home-background"></div>
+            <div id="home-text">
+               <h1 class="text-center m-0">
+                  Üdvözlünk a FlexHub-on! {% comment %} Lépj be az izomországba, ahol a fáradtság
+                  elmúlik, de az eredmények örökre maradnak!<br />Nálunk az izzadtság cseppjei a
+                  siker jelei! {% endcomment %}
+               </h1>
+               <div id="home-buttons">
+                  <a href="/gym-search" class="btn">Edzőterem kereső</a>
+                  <a href="/signup" class="btn">Regisztráció</a>
+               </div>
+            </div>
          </div>
-      </nav>
-
-      <div class="container"> {% block content %} {% endblock content %} </div>
-      <footer>
-         <!-- Ide jöhet majd a logo nagyba alatta a név jobbra mellette social meadia linkek ikonok, néhány kontakt infó -->
-         <p class="text-center mb-0">© 2024 FlexHub. Minden jog fenntartva.</p>
-      </footer>
+         {% endblock content %}
+      </div>
+      {% include "footer.html" %} {% block js %}
       <script src="../static/js/home.js"></script>
+      {% endblock js %}
       <script
          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
