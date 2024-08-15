@@ -84,6 +84,7 @@ p {
 }
 
 .nav-link {
+   width: 100%;
    text-decoration: none;
    color: var(--primary-text);
 }
