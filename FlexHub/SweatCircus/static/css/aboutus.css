@@ -1,0 +1,47 @@
+/* ××××× About us section styles ××××× */
+.container {
+   height: calc(100% - 123.6px);
+}
+
+section {
+   background-color: var(--secondary-bg);
+   border-radius: 16px;
+}
+
+#about-us-title,
+#about-project-title {
+   border-bottom: var(--highlight) solid 5px;
+}
+
+#about-us-imgs {
+   display: flex;
+   justify-content: space-evenly;
+}
+
+#about-us-text {
+   font-size: 18px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.card {
+   width: 11rem;
+   border: var(--accent) solid 1px;
+}
+
+#about-us img {
+   height: 15rem;
+}
+
+.card-body {
+   background-color: var(--secondary-text);
+}
+
+/* ××××× About project section styles ××××× */
+#about-project-text {
+   font-size: 18px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
