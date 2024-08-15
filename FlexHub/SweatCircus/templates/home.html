@@ -36,6 +36,9 @@
                   <a class="nav-link" href="/gym-search">Edzőterem kereső</a>
                </li>
                <li class="nav-item px-2">
+                  <a class="nav-link" href="/about-us">Rólunk</a>
+               </li>
+               <li class="nav-item px-2">
                   <a class="nav-link" href="/login">Belépés</a>
                </li>
                <!-- Angol, magyar fordítás gomb nyomással -->
@@ -43,53 +46,7 @@
          </div>
       </nav>
 
-      <div class="container">
-         {% block content %}
-         <section id="about-us" class="mt-4 py-3">
-            <h2 class="ms-3 mb-3 pb-1 w-25" id="about-us-title">Rólunk</h2>
-            <div class="row" id="about-us-container">
-               <div class="col" id="about-us-imgs">
-                  <div class="card">
-                     <img src="../static/img/Zsolt.jpg" class="card-img-top" alt="..." />
-                     <div class="card-body">
-                        <p class="card-text text-center">
-                           <b>Fülöp Zsolt</b><br /><i>Junior Frontend Fejlesztő</i>
-                        </p>
-                     </div>
-                  </div>
-                  <div class="card">
-                     <img src="../static/img/Gyula.jpg" class="card-img-top" alt="..." />
-                     <div class="card-body">
-                        <p class="card-text text-center"><b>Fazekas Gyula</b><br /><i>Tanuló</i></p>
-                     </div>
-                  </div>
-               </div>
-               <div class="col" id="about-us-text">
-                  <p class="pe-5">
-                     Üdvözlünk kedves Felhasználó a FlexHub-on. 2023-ban közösen megkezdtük
-                     tanulmányainkat a Debreceni SZC Mechwart András Gépipari és Informatikai
-                     Technikum falain belül Szoftverfejlesztő és tesztelő tanfolyamon. Sok érdekes
-                     dolgot tanultunk de mind a kettőnket leginkább a weboldal készítés fogott meg.
-                     Ezt vegyítve a testépítés hobbinkkal jutottunk arra a következtetésre, hogy
-                     ebből csinálunk egy weboldalt.
-                  </p>
-               </div>
-            </div>
-         </section>
-         <section id="about-project" class="mt-4 py-3">
-            <h2 class="ms-3 mb-3 pb-1 w-25" id="about-project-title">Projektünkről</h2>
-            <p class="mx-auto mb-0 w-50" id="about-project-text">
-               Szoftverfejlesztő és tesztelő képzésünk vizsga remekjeként, arra jutottunk, hogy
-               valami olyat akarunk kiadni a kezeink közül, amivel segíteni tudunk az edzeni
-               vágyakozó társainkon. Tapasztalatból tudjuk, hogy ez talán az egyik legfontosabb
-               döntés. Ezért hát megalkottuk a FlexHub oldalunk, ahol a felhasználók kedvük szerint
-               tudnak keresni edző termeket a kívánt városon belül. Továbbá ha úgy döntenek a
-               felhasználóink, hogy ők ennél is többet szeretnének, akkor egy gyors regisztráció
-               után új ajtók nyílnak meg előttük. ;)
-            </p>
-         </section>
-         {% endblock content %}
-      </div>
+      <div class="container"> {% block content %} {% endblock content %} </div>
       <footer>
          <!-- Ide jöhet majd a logo nagyba alatta a név jobbra mellette social meadia linkek ikonok, néhány kontakt infó -->
          <p class="text-center mb-0">© 2024 FlexHub. Minden jog fenntartva.</p>

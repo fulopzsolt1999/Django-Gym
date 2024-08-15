@@ -40,3 +40,6 @@ class CustomLoginView(LoginView):
 
 def Login(request):
    return render(request, "login.html")
+
+def AboutUs(request):
+   return render(request, "aboutUs.html")
