@@ -1,0 +1,95 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg p-0" id="navbar">
+   <div class="container-fluid m-0 p-0">
+      <a class="navbar-brand m-0 p-0" href="/">
+         <div id="logo">
+            <img id="logo-img" src="{% static 'img/flexhub.png' %}" alt="FlexHub" />
+            <p class="m-0 p-0"><span id="logo-flex">Flex</span><span id="logo-hub">Hub</span></p>
+         </div>
+      </a>
+      <button
+      class="navbar-toggler me-3"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav ms-4 px-2">
+            <li class="nav-item">
+               <a class="nav-link mx-1 px-3" href="/">Főoldal</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link mx-1 px-3" href="/gym-search">Edzőterem kereső</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link mx-1 px-3" href="/about-us">Rólunk</a>
+            </li>
+            {% if user.is_authenticated %}
+               <li class="nav-item ms-4" id="container-extra">
+                  <div class="dropdown" id="dropdown-extra">
+                     <button class="btn dropdown-toggle" type="button" id="dropdown-extra-button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Extra szolgáltatások
+                     </button>
+                     <ul class="dropdown-menu" id="dropdown-extra-menu" aria-labelledby="dropdown-extra-button">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                           <form action="{% url 'logout' %}" method="post">
+                              {% csrf_token %}
+                              <button type="submit" class="dropdown-item">Kijelentkezés</button>
+                           </form>
+                        </li>
+                     </ul>
+                  </div>
+               </li>
+               {% else %}
+               <li class="nav-item">
+                  <div class="dropdown" id="profile-dropdown">
+                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-extra-button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Extra szolgáltatások
+                     </button>
+                     <ul class="dropdown-extra-menu" aria-labelledby="dropdown-extra-button">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                           <form action="{% url 'logout' %}" method="post">
+                              {% csrf_token %}
+                              <button type="submit" class="dropdown-item">Kijelentkezés</button>
+                           </form>
+                        </li>
+                     </ul>
+                  </div>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link px-3" href="{% url 'login' %}">Bejelentkezés</a>
+               </li>
+            {% endif %}
+            <!-- Angol, magyar fordítás gomb nyomással -->
+         </ul>
+      </div>
+   </div>
+   <div class="dropdown" id="profile-dropdown">
+      <button class="btn dropdown-toggle" type="button" id="profile-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
+         <i class="fa-solid fa-user"></i>
+      </button>
+      <ul class="dropdown-menu" id="profile-dropdown-menu" aria-labelledby="profile-dropdown-button">
+         <li><a class="dropdown-item" href="#">Action</a></li>
+         <li><a class="dropdown-item" href="#">Another action</a></li>
+         <li>
+            <form action="{% url 'logout' %}" method="post">
+               {% csrf_token %}
+               <button type="submit" class="dropdown-item">Kijelentkezés</button>
+            </form>
+         </li>
+      </ul>
+   </div>
+   <div class="px-1" id="flags">
+      <img src="{% static 'img/hun-flag.png' %}" alt="Magyar zászló">
+      <img src="{% static 'img/uk-flag.png' %}" alt="Angol zászló">
+   </div>
+</nav>
+
