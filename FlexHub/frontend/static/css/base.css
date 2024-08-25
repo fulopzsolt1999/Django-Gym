@@ -9,7 +9,7 @@
    --primary-text: #ffffff;
    --secondary-text: #c0c0c0;
    --highlight: #00e7c9;
-   --max-height: calc(100% - 25.6px);
+   --max-height: calc(100% - 1rem);
 }
 
 /* ××××× General styles ××××× */
@@ -32,18 +32,16 @@ h2,
 h3,
 h4 {
    font-family: "Montserrat", sans-serif;
+   word-break: keep-all;
 }
 
 p {
    text-align: justify;
 }
 
-.navbar {
+#navbar {
    background-color: var(--secondary-text);
-}
-
-.navbar-brand {
-   width: 20rem;
+   height: fit-content;
 }
 
 #logo {
@@ -75,36 +73,107 @@ p {
    margin-right: -0.5rem;
 }
 
+.navbar-toggler {
+   border: 1px solid var(--primary-bg);
+}
+
+.container-fluid .show {
+   margin-bottom: 1rem;
+}
+
 .navbar-nav {
-   position: absolute;
-   right: 3rem;
-   display: flex;
-   flex-direction: row;
-   gap: 1rem;
+   height: 100%;
 }
 
 .nav-item {
-   background-color: var(--accent);
-   border-radius: 10px;
-   transition: all 0.3s ease;
+   height: 100%;
+   background-color: unset;
+}
+
+.nav-link:hover {
+   background-color: var(--highlight);
 }
 
 .nav-link {
-   width: 100%;
-   text-decoration: none;
+   color: var(--primary-bg);
+   text-align: right;
+   transition: background-color 0.3s ease;
+}
+
+#container-extra {
+   display: flex;
+   justify-content: right;
+}
+
+#dropdown-extra-button {
+   color: var(--primary-bg);
+   border: none;
+   padding: 0.6rem 0 0 0;
+}
+
+#dropdown-extra-menu {
+   background-color: var(--accent);
+   width: fit-content;
+   position: absolute;
+}
+
+#dropdown-extra-menu li a,
+#dropdown-extra-menu li button{
    color: var(--primary-text);
 }
 
-.nav-item:hover {
+#profile-dropdown {
+   height: 64px;
+   position: absolute;
+   top: 0;
+   right: 8rem;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+}
+
+#profile-dropdown-button {
+   background-color: var(--primary-bg);
+   color: var(--primary-text);
+   border: none;
+}
+
+#profile-dropdown-menu {
+   background-color: var(--accent);
+   position: absolute;
+   right: 10rem;
+}
+
+#profile-dropdown-menu li .dropdown-item {
+   color: var(--primary-text);
+   transition: all 0.3s ease;
+}
+
+#profile-dropdown-menu li .dropdown-item:hover {
    background-color: var(--highlight);
-   -webkit-box-shadow: 0px 0px 10px 5px rgba(65, 90, 119, 1);
-   -moz-box-shadow: 0px 0px 10px 5px rgba(65, 90, 119, 1);
-   box-shadow: 0px 0px 10px 5px rgba(65, 90, 119, 1);
+   color: var(--primary-bg);
+}
+
+#flags {
+   height: 64px;
+   position: absolute;
+   top: 0;
+   right: 4.7rem;
+   display: flex;
+   flex-direction: row;
+   gap: 0.5rem;
+   justify-content: center;
+   align-items: center;
+}
+
+#flags img {
+   height: 1.1rem;
+   cursor: pointer;
 }
 
 #container {
    height: var(--max-height);
-   /* margin-bottom: 2.65rem; */
 }
 
 /* ××××× Home section styles ××××× */
@@ -146,6 +215,7 @@ p {
 }
 
 #home-buttons {
+   width: fit-content;
    display: flex;
    flex-direction: row;
    gap: 4rem;
@@ -154,9 +224,9 @@ p {
    text-align: center;
 }
 
-#home-buttons a {
+#home-buttons .btn {
    height: 3rem;
-   width: 10rem;
+   width: 11rem;
    background-color: var(--accent);
    color: var(--primary-text);
    display: flex;
@@ -168,7 +238,7 @@ p {
    transition: all 0.3s ease;
 }
 
-#home-buttons a:hover {
+#home-buttons .btn:hover {
    background-color: var(--highlight);
    color: var(--primary-bg);
    -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 231, 201, 1);
@@ -179,8 +249,6 @@ p {
 /* ××××× Footer styles ××××× */
 footer {
    width: 100%;
-   position: relative;
-   bottom: 0;
    background-color: var(--secondary-text);
    color: #0d1b2a;
 }

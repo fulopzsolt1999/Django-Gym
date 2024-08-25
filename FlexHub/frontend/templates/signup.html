@@ -1,0 +1,61 @@
+{% extends "base.html" %} 
+{% block css %}
+   <link rel="stylesheet" href="../static/css/signup.css" />
+{% endblock css %}
+{% block title %}
+   Regisztráció
+{% endblock title %}
+{% block content %}
+   <div id="container">
+      {% include 'navbar.html' %}
+      <div id="signup-container">
+         <div id="form-container">
+            <h1 class="text-center mb-3 pb-3">Regisztráció</h1>
+            <form method="post">
+               {% csrf_token %}
+               <div class="row">
+                  <div class="mb-3 col-md-6">
+                     <label for="email" class="form-label">Email cím</label>
+                     <input type="email" class="form-control" id="email" name="email" placeholder="minta@mail.hu" required />
+                  </div>
+                  <div class="mb-3 col-md-6">
+                     <label for="password" class="form-label">Jelszó</label>
+                     <input type="password" class="form-control" id="password" name="password" placeholder="********" required />
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="mb-3 col-md-6">
+                     <label for="name" class="form-label">Vezetéknév</label>
+                     <input type="text" class="form-control" id="last-name" name="last-name" placeholder="Minta" required />
+                  </div>
+                  <div class="mb-3 col-md-6">
+                     <label for="name" class="form-label">Keresztnév</label>
+                     <input type="text" class="form-control" id="first-name" name="first-name" placeholder="Márton" required />
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="mb-3 col-md-6">
+                     <label for="weight" class="form-label">Súly (kg)</label>
+                     <input type="number" class="form-control" id="weight" name="weight" min="0" value="0" required />
+                  </div>
+                  <div class="mb-3 col-md-6">
+                     <label for="height" class="form-label">Magasság (cm)</label>
+                     <input type="number" class="form-control" id="height" name="height" min="0" value="0" required />
+                  </div>
+               </div>
+               <div class="form-group mb-3">
+                  <label class="form-label" for="goal">Cél</label>
+                  <select class="form-control" id="goal" name="goal" required>
+                     {% for goal in bodyGoals %}
+                        <option>{{ goal }}</option>
+                     {% endfor %}
+                  </select>
+               </div>
+            </form>
+            <button type="submit" class="btn mt-4">Regisztrálok</button>
+         </div>
+      </div>
+   </div>
+{% endblock content %}
+
+    
