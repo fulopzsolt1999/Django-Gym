@@ -4,15 +4,17 @@ body {
    background: rgb(13,27,42);
    background: linear-gradient(0deg, rgba(13,27,42,1) 0%, rgba(9,9,121,1) 20%, rgba(65,90,119,1) 100%);
    background-repeat: inherit;
-   background-size: contain;
+   background-size: cover;
 }
 
-#about-us-container {
-   height: calc(100% - 74px);
+#about-us-container{
+   padding: 1.4rem 0;
    gap: 1rem;
 }
 
-section {
+#about-us,
+#about-project {
+   width: 70%;
    background-color: var(--secondary-bg);
    border-radius: 16px;
 }
@@ -36,7 +38,7 @@ section {
 }
 
 .card {
-   width: 15rem;
+   width: 10rem;
    border: var(--accent) solid 1px;
    border-radius: 10px;
 }

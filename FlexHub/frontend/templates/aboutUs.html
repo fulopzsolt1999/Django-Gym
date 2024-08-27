@@ -9,12 +9,12 @@
    <div id="container">
       {% include 'navbar.html' %}
       <div class="row" id="about-us-container">
-         <section id="about-us" class="col-12 mt-4 py-4 w-75 mx-auto">
-            <h2 class="ms-3 mb-3 pb-1 w-25" id="about-us-title">Rólunk</h2>
-            <div class="row" id="about-us-container">
-               <div class="col" id="about-us-imgs">
+         <section id="about-us" class="col-12 mx-auto">
+            <h2 class="w-25" id="about-us-title">Rólunk</h2>
+            <div class="row" id="about-us-cards">
+               <div class="col-lg-6" id="about-us-imgs">
                   <div class="card">
-                     <img src="../static/img/Zsolt.jpg" class="card-img-top" alt="..." />
+                     <img src="../static/img/Zsolt.jpg" class="card-img-top img-fluid" alt="Fülöp Zsolt" title="Fülöp Zsolt" />
                      <div class="card-body">
                         <p class="card-text text-center">
                            <b>Fülöp Zsolt</b><br /><i>Junior Frontend Fejlesztő</i>
@@ -22,27 +22,25 @@
                      </div>
                   </div>
                   <div class="card">
-                     <img src="../static/img/Gyula.jpg" class="card-img-top" alt="..." />
+                     <img src="../static/img/Gyula.jpg" class="card-img-top img-fluid" alt="Fazekas Gyula" title="Fazekas Gyula" />
                      <div class="card-body">
-                        <p class="card-text text-center"><b>Fazekas Gyula</b><br /><i>Tanuló</i></p>
+                        <p class="card-text text-center">
+                           <b>Fazekas Gyula</b><br /><i>Biztosítóberendezés műszerész</i>
+                        </p>
                      </div>
                   </div>
                </div>
-               <div class="col ps-0 pe-3" id="about-us-text">
+               <div class="col-lg-6" id="about-us-text">
                   <p>
-                     Üdvözlünk kedves Felhasználó a FlexHub-on. 2023-ban közösen megkezdtük
-                     tanulmányainkat a Debreceni SZC Mechwart András Gépipari és Informatikai Technikum
-                     falain belül Szoftverfejlesztő és tesztelő tanfolyamon. Sok érdekes dolgot tanultunk
-                     de mind a kettőnket leginkább a weboldal készítés fogott meg. Ezt vegyítve a
-                     testépítés hobbinkkal jutottunk arra a következtetésre, hogy ebből csinálunk egy
-                     weboldalt.
+                     2023-ban közösen kezdtük meg tanulmányainkat a Debreceni SZC Mechwart András Gépipari és Informatikai Technikum falain belül Szoftverfejlesztő és tesztelő tanfolyamon. Sok érdekes dolgot tanultunk de mind a kettőnket leginkább a weboldal készítés fogott meg. Ezt vegyítve a
+                     testépítés hobbinkkal jutottunk arra a következtetésre, hogy ebből csinálunk egy weboldalt.
                   </p>
                </div>
             </div>
          </section>
-         <section id="about-project" class="col-12 mb-4 py-4 w-75 mx-auto">
-            <h2 class="ms-3 mb-3 pb-1 w-25" id="about-project-title">Projektünkről</h2>
-            <p class="mx-auto mb-0 w-75" id="about-project-text">
+         <section id="about-project" class="col-12 mx-auto">
+            <h2 class="w-25" id="about-project-title">Projektünkről</h2>
+            <p class="mx-auto p-3" id="about-project-text">
                Szoftverfejlesztő és tesztelő képzésünk vizsga remekjeként, arra jutottunk, hogy valami
                olyat akarunk kiadni a kezeink közül, amivel segíteni tudunk az edzeni vágyakozó
                társainkon. Tapasztalatból tudjuk, hogy ez talán az egyik legfontosabb döntés. Ezért hát
@@ -52,7 +50,6 @@
             </p>
          </section>
       </div>
-      {% include 'footer.html' %}
+      {% include "footer.html" %}
    </div>
-   
 {% endblock content %}
