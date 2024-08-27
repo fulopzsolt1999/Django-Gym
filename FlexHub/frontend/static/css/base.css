@@ -77,10 +77,6 @@ p {
    border: 1px solid var(--primary-bg);
 }
 
-.container-fluid .show {
-   margin-bottom: 1rem;
-}
-
 .navbar-nav {
    height: 100%;
 }
@@ -97,7 +93,9 @@ p {
    transition: background-color 0.3s ease;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+#dropdown-extra-button:hover,
+#dropdown-extra-menu li a:hover {
    background-color: var(--primary-bg);
    color: var(--primary-text);
 }
@@ -110,18 +108,17 @@ p {
 #dropdown-extra-button {
    color: var(--primary-bg);
    border: none;
-   padding: 0.6rem 0 0 0;
+   margin-top: 0.4px;
 }
 
 #dropdown-extra-menu {
-   background-color: var(--accent);
+   background-color: var(--secondary-text);
    width: fit-content;
    position: absolute;
 }
 
-#dropdown-extra-menu li a,
-#dropdown-extra-menu li button{
-   color: var(--primary-text);
+#dropdown-extra-menu li a{
+   color: var(--primary-bg);
 }
 
 #profile-dropdown {
