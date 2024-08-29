@@ -15,8 +15,7 @@ def registration_view(request):
    if request.method == "POST":
       form = RegistrationForm(request.POST)
       if form.is_valid():
-         user = form.save()
-         login(request, user)
+         form.save()
          return render(request, "premiumPump.html")
    else:
       form = RegistrationForm()
