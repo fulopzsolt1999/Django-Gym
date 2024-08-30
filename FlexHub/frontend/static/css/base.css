@@ -48,8 +48,8 @@ p {
 }
 
 #navbar {
-   background-color: var(--secondary-text);
    height: fit-content;
+   background-color: var(--secondary-text);
 }
 
 #logo {

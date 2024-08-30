@@ -1,12 +1,16 @@
 /* ××××× About us section styles ××××× */
+#container {
+
+}
 
 #about-us-container{
-   height: calc(100% - 74px);
+   height: fit-content;
    padding: 1.4rem 0;
    background: rgb(13,27,42);
    background: linear-gradient(0deg, rgba(13,27,42,1) 0%, rgba(9,9,121,1) 20%, rgba(65,90,119,1) 100%);
    background-repeat: inherit;
    background-size: cover;
+   gap: 1rem;
 }
 
 #about-us,
@@ -84,10 +88,6 @@
 /* ××××× Responsive styles ××××× */
 
 @media screen and (max-width: 1300px) {
-   #about-us-container{
-      height: fit-content;
-      gap: 2rem;
-   }
    #about-project {
       height: fit-content;
    }
@@ -109,6 +109,12 @@
 @media screen and (max-width: 600px) {
    #about-us-text, #about-project-text {
       padding: 0;
+   }
+   .card {
+      width: 8rem;
+   }
+   .card-body {
+      padding: 0.5rem;
    }
 }
 
