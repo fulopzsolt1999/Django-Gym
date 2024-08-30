@@ -11,7 +11,7 @@
       class="navbar-toggler me-3"
       type="button"
       data-bs-toggle="collapse"
-      data-bs-target="navbarSupportedContent"
+      data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation">
@@ -50,20 +50,22 @@
          </ul>
       </div>
    </div>
-   <div class="dropdown" id="profile-dropdown">
-      <button class="btn dropdown-toggle" type="button" id="profile-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
-         <i class="fa-solid fa-user"></i>
-      </button>
-      <ul class="dropdown-menu" id="profile-dropdown-menu" aria-labelledby="profile-dropdown-button">
-         <li><a class="dropdown-item" href="#">Beállítások</a></li>
-         <li>
-            <form action="{% url 'logout' %}" method="post">
-               {% csrf_token %}
-               <button type="submit" class="dropdown-item">Kijelentkezés</button>
-            </form>
-         </li>
-      </ul>
-   </div>
+   {% if user.is_authenticated %}
+      <div class="dropdown" id="profile-dropdown">
+         <button class="btn dropdown-toggle" type="button" id="profile-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-user"></i>
+         </button>
+         <ul class="dropdown-menu" id="profile-dropdown-menu" aria-labelledby="profile-dropdown-button">
+            <li><a class="dropdown-item" href="#">Beállítások</a></li>
+            <li>
+               <form action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="dropdown-item">Kijelentkezés</button>
+               </form>
+            </li>
+         </ul>
+      </div>
+   {% endif %}
    <div class="px-1" id="flags">
       <img src="{% static 'img/hun-flag.png' %}" alt="Magyar zászló">
       <img src="{% static 'img/uk-flag.png' %}" alt="Angol zászló">

@@ -39,9 +39,17 @@ p {
    text-align: justify;
 }
 
+#container {
+   height: var(--max-height);
+   background: rgb(13,27,42);
+   background: linear-gradient(0deg, rgba(13,27,42,1) 0%, rgba(9,9,121,1) 20%, rgba(65,90,119,1) 100%);
+   background-repeat: inherit;
+   background-size: cover;
+}
+
 #navbar {
-   background-color: var(--secondary-text);
    height: fit-content;
+   background-color: var(--secondary-text);
 }
 
 #logo {
@@ -169,10 +177,6 @@ p {
 #flags img {
    height: 1.1rem;
    cursor: pointer;
-}
-
-#container {
-   height: var(--max-height);
 }
 
 /* ××××× Home section styles ××××× */

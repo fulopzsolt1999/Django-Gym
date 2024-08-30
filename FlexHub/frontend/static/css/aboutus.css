@@ -1,33 +1,41 @@
 /* ××××× About us section styles ××××× */
-body {
-   height: 100%;
+#container {
+
+}
+
+#about-us-container{
+   height: fit-content;
+   padding: 1.4rem 0;
    background: rgb(13,27,42);
    background: linear-gradient(0deg, rgba(13,27,42,1) 0%, rgba(9,9,121,1) 20%, rgba(65,90,119,1) 100%);
    background-repeat: inherit;
    background-size: cover;
-}
-
-#about-us-container{
-   padding: 1.4rem 0;
    gap: 1rem;
 }
 
 #about-us,
 #about-project {
+   height: fit-content;
    width: 70%;
+   padding: 1rem;
    background-color: var(--secondary-bg);
    border-radius: 16px;
 }
 
 #about-us-title,
 #about-project-title {
+   width: 50%;
    border-bottom: var(--highlight) solid 5px;
+   margin: 1rem;
+   padding-bottom: 0.5rem;
 }
 
 #about-us-imgs {
+   padding: 1rem 0 0 1rem;
    height: fit-content;
    display: flex;
-   justify-content: space-evenly;
+   justify-content:center;
+   gap: 1rem;
 }
 
 #about-us-text {
@@ -37,10 +45,19 @@ body {
    justify-content: center;
 }
 
+#about-us-text p {
+   margin: 0;
+   padding: 0 1rem;
+}
+
 .card {
    width: 10rem;
    border: var(--accent) solid 1px;
    border-radius: 10px;
+}
+
+.card-text i {
+   word-break: keep-all;
 }
 
 #about-us img {
@@ -54,9 +71,60 @@ body {
 }
 
 /* ××××× About project section styles ××××× */
+
+#about-project {
+   height: 18rem;
+}
+
 #about-project-text {
+   margin: 0;
+   padding: 1rem;
    font-size: 18px;
    display: flex;
    justify-content: center;
    align-items: center;
+}
+
+/* ××××× Responsive styles ××××× */
+
+@media screen and (max-width: 1300px) {
+   #about-project {
+      height: fit-content;
+   }
+}
+
+@media screen and (max-width: 991px) {
+   #about-us-cards {
+      gap: 1rem;
+   }
+   #about-us-imgs {
+      padding: 1rem 0;
+   }
+   #about-us-text, #about-project-text {
+      width: 90%;
+      margin: auto;
+   }
+}
+
+@media screen and (max-width: 600px) {
+   #about-us-text, #about-project-text {
+      padding: 0;
+   }
+   .card {
+      width: 8rem;
+   }
+   .card-body {
+      padding: 0.5rem;
+   }
+}
+
+@media screen and (max-width: 570px) {
+   #about-us-title, #about-project-title {
+      width: calc(100% - 2rem);
+   }
+   #about-us-imgs {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+   }
 }

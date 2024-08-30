@@ -69,16 +69,14 @@ class BodyGoals(models.Model):
       template = '{0.name}'
       return template.format(self)
 
-class User(models.Model):
-   email = models.EmailField(max_length=250)
-   password = models.CharField(max_length=250)
+class Exercises(models.Model):
    name = models.CharField(max_length=250)
-   weight = models.IntegerField()
-   height = models.IntegerField()
-   body_goals = models.ForeignKey(BodyGoals, on_delete=models.CASCADE, default="-")
+   muscle_group = models.CharField(max_length=250)
+   image = models.ImageField(default="", blank=True)
+   video = models.URLField()
 
    class Meta:
-      verbose_name_plural = 'Regisztrált felhasználók'
+      verbose_name_plural = 'Gyakorlatok'
 
    def __str__(self):
       template = '{0.name}'
