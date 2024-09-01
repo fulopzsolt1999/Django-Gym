@@ -81,7 +81,7 @@
          <li>
             <form action="{% url 'logout' %}" method="post">
                {% csrf_token %}
-               <button type="submit" class="dropdown-item">Kijelentkezés</button>
+               <button type="submit" class="dropdown-item" id="logout">Kijelentkezés</button>
             </form>
          </li>
       </ul>
