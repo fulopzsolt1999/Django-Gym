@@ -1,13 +1,14 @@
 /* ××××× About us section styles ××××× */
-#container {
-
-}
-
-#about-us-container{
+#about-us-container {
    height: fit-content;
    padding: 1.4rem 0;
-   background: rgb(13,27,42);
-   background: linear-gradient(0deg, rgba(13,27,42,1) 0%, rgba(9,9,121,1) 20%, rgba(65,90,119,1) 100%);
+   background: rgb(13, 27, 42);
+   background: linear-gradient(
+      0deg,
+      rgba(13, 27, 42, 1) 0%,
+      rgba(9, 9, 121, 1) 20%,
+      rgba(65, 90, 119, 1) 100%
+   );
    background-repeat: inherit;
    background-size: cover;
    gap: 1rem;
@@ -34,7 +35,7 @@
    padding: 1rem 0 0 1rem;
    height: fit-content;
    display: flex;
-   justify-content:center;
+   justify-content: center;
    gap: 1rem;
 }
 
@@ -100,14 +101,16 @@
    #about-us-imgs {
       padding: 1rem 0;
    }
-   #about-us-text, #about-project-text {
+   #about-us-text,
+   #about-project-text {
       width: 90%;
       margin: auto;
    }
 }
 
 @media screen and (max-width: 600px) {
-   #about-us-text, #about-project-text {
+   #about-us-text,
+   #about-project-text {
       padding: 0;
    }
    .card {
@@ -119,7 +122,8 @@
 }
 
 @media screen and (max-width: 570px) {
-   #about-us-title, #about-project-title {
+   #about-us-title,
+   #about-project-title {
       width: calc(100% - 2rem);
    }
    #about-us-imgs {

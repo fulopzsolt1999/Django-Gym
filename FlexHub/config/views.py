@@ -29,7 +29,7 @@ def registration_view(request):
             return redirect('register')
          
          form.save()
-         return render(request, "premiumPump.html")
+         return render(request, "register.html")
    else:
       form = RegistrationForm()
    return render(request, "registration/register.html", {"form": form})

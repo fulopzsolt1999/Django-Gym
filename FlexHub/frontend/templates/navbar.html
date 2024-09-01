@@ -72,11 +72,11 @@
          class="dropdown-menu pt-0"
          id="profile-dropdown-menu"
          aria-labelledby="profile-dropdown-button">
-         <li
-            ><a class="dropdown-item text-center" id="profile-username"
-               >Üdv, {{ user.username }}!</a
-            ></li
-         >
+         <li>
+            <a class="dropdown-item text-center" id="profile-username">
+               Üdv, {{ user.username }}!
+            </a>
+         </li>
          <li><a class="dropdown-item" href="#">Beállítások</a></li>
          <li>
             <form action="{% url 'logout' %}" method="post">

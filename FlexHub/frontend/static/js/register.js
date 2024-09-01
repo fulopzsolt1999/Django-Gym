@@ -24,26 +24,29 @@ let passwordValid = false;
 // Event listeners for real-time validation
 username.addEventListener("input", () => {
    const usernamePattern = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,150}$/;
-   if (!checkIfBlank(username, usernameError) && !usernamePattern.test(username.value)) {
-      usernameError.textContent =
-         "Nem megfelelő felhasználónév formátum. (min. 8 karakter) [a-z,A-Z,0-9,@.+-_]";
-      username.style.border = "2px solid red";
-   } else {
-      usernameError.textContent = "";
-      username.style.border = "2px solid green";
-      usernameValid = true;
+   if (!checkIfBlank(username, usernameError)) {
+      if (!usernamePattern.test(username.value)) {
+         usernameError.textContent = "Minimum 8 karakter. [Pelda123]";
+         username.style.border = "2px solid red";
+      } else {
+         usernameError.textContent = "";
+         username.style.border = "2px solid green";
+         usernameValid = true;
+      }
    }
 });
 
 email.addEventListener("input", () => {
    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-   if (!checkIfBlank(email, emailError) && !emailPattern.test(email.value)) {
-      emailError.textContent = "Nem megfelelő email cím formátum. [example@example.com]";
-      email.style.border = "2px solid red";
-   } else {
-      emailError.textContent = "";
-      email.style.border = "2px solid green";
-      emailValid = true;
+   if (!checkIfBlank(email, emailError)) {
+      if (!emailPattern.test(email.value)) {
+         emailError.textContent = "Formátum: [pelda@pelda.com]";
+         email.style.border = "2px solid red";
+      } else {
+         emailError.textContent = "";
+         email.style.border = "2px solid green";
+         emailValid = true;
+      }
    }
 });
 
@@ -103,7 +106,7 @@ password1.addEventListener("input", () => {
    ];
    if (!checkIfBlank(password1, passwordError)) {
       if (!passwordPattern.test(password1.value)) {
-         passwordError.textContent = "Nem megfelelő jelszó formátum. [a-z,A-Z,0-9,?!.:-/*]";
+         passwordError.textContent = "Minimum 8 karakter. Formátum: [hP@dg072]";
          password1.style.border = "2px solid red";
       } else if (
          password1.value
@@ -114,24 +117,33 @@ password1.addEventListener("input", () => {
                   lastName.value.toLowerCase()
             )
       ) {
-         passwordError.textContent =
-            "Nem lehet hasonló a jelszó mint a felhasználónév/nevet. [a-z,A-Z,0-9,?!%$&@*]";
+         passwordError.textContent = "Nem tartalmathatja a felhasználó nevet / nevet.";
       } else if (commonPasswords.includes(password1.value.toLowerCase())) {
-         passwordError.textContent = "Nem lehet ilyen egyszerű a jelszó. [a-z,A-Z,0-9,?!.:-/*]";
-      } else {
-         passwordError.textContent = "Meg kell egyeznie a 2 mezőben a jelszónak.";
+         passwordError.textContent = "Túl egyszerű a jelszó.";
+      } else if (password1.value !== password2.value) {
+         passwordError.textContent = "Nem egyeznek a jelszavak.";
+         password1.style.border = "2px solid red";
          password2.style.border = "2px solid red";
+      } else {
+         passwordError.textContent = "";
+         password1.style.border = "2px solid green";
+         password2.style.border = "2px solid green";
+         passwordValid = true;
       }
    }
 });
 
-password2.addEventListener("input", () => {
-   if (password1.value === password2.value) {
-      passwordError.textContent = "";
-      password1.style.border = "2px solid green";
-      password2.style.border = "2px solid green";
-      passwordValid = true;
+document.addEventListener("keyup", () => {
+   if (usernameValid && emailValid && firstNameValid && lastNameValid && passwordValid) {
+      submitButton.classList.remove("disabled");
+   } else {
+      submitButton.classList.add("disabled");
    }
+});
+
+// Successed registration feedback
+submitButton.addEventListener("click", () => {
+   window.alert("Sikeres regisztráció!");
 });
 
 // Check if not empty
@@ -150,7 +162,7 @@ function checkIfBlank(inputField, errorField) {
 function firstOrLastNameChecking(inputField, errorField) {
    const namePattern = /^[A-ZÁÉÚÓÓÜÖ][-,a-záéúőóüö. '].{1,}$/;
    if (!checkIfBlank(inputField, errorField) && !namePattern.test(inputField.value)) {
-      errorField.textContent = "Nem megfelelő név formátum. [Minta]";
+      errorField.textContent = "Formátum: [Minta]";
       inputField.style.border = "2px solid red";
    } else {
       errorField.textContent = "";
@@ -163,11 +175,9 @@ function firstOrLastNameChecking(inputField, errorField) {
    }
 }
 
-document.addEventListener("keyup", () => {
-   console.log("keyup");
-   if (usernameValid && emailValid && firstNameValid && lastNameValid && passwordValid) {
-      submitButton.classList.remove("disabled");
-   } else {
-      submitButton.classList.add("disabled");
+// Prevent enter key pressing
+jQuery("form").bind("keypress keydown keyup", function (e) {
+   if (e.keyCode == 13) {
+      e.preventDefault();
    }
 });
