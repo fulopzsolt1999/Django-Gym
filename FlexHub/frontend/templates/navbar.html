@@ -8,13 +8,13 @@
          </div>
       </a>
       <button
-      class="navbar-toggler me-3"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation">
+         class="navbar-toggler me-3"
+         type="button"
+         data-bs-toggle="collapse"
+         data-bs-target="#navbarSupportedContent"
+         aria-controls="navbarSupportedContent"
+         aria-expanded="false"
+         aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -29,45 +29,66 @@
                <a class="nav-link mx-1 px-3" href="/about-us">Rólunk</a>
             </li>
             {% if user.is_authenticated %}
-               <li class="nav-item ms-3" id="container-extra">
-                  <div class="dropdown" id="dropdown-extra">
-                     <button class="btn dropdown-toggle p-2" type="button" id="dropdown-extra-button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Extra szolgáltatások
-                     </button>
-                     <ul class="dropdown-menu" id="dropdown-extra-menu" aria-labelledby="dropdown-extra-button">
-                        <li><a class="dropdown-item" href="#">Kalória kalkulátor</a></li>
-                        <li><a class="dropdown-item" href="#">Edzők edzéstervei</a></li>
-                        <li><a class="dropdown-item" href="#">Edzők étrendjei</a></li>
-                     </ul>
-                  </div>
-               </li>
-               {% else %}
-                  <li class="nav-item">
-                     <a class="nav-link px-3" href="{% url 'login' %}">Bejelentkezés</a>
-                  </li>
+            <li class="nav-item ms-3" id="container-extra">
+               <div class="dropdown" id="dropdown-extra">
+                  <button
+                     class="btn dropdown-toggle p-2"
+                     type="button"
+                     id="dropdown-extra-button"
+                     data-bs-toggle="dropdown"
+                     aria-expanded="false">
+                     Extra szolgáltatások
+                  </button>
+                  <ul
+                     class="dropdown-menu"
+                     id="dropdown-extra-menu"
+                     aria-labelledby="dropdown-extra-button">
+                     <li><a class="dropdown-item" href="#">Kalória kalkulátor</a></li>
+                     <li><a class="dropdown-item" href="#">Edzők edzéstervei</a></li>
+                     <li><a class="dropdown-item" href="#">Edzők étrendjei</a></li>
+                  </ul>
+               </div>
+            </li>
+            {% else %}
+            <li class="nav-item">
+               <a class="nav-link px-3" href="{% url 'login' %}">Bejelentkezés</a>
+            </li>
             {% endif %}
             <!-- Angol, magyar fordítás gomb nyomással -->
          </ul>
       </div>
    </div>
    {% if user.is_authenticated %}
-      <div class="dropdown" id="profile-dropdown">
-         <button class="btn dropdown-toggle" type="button" id="profile-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-user"></i>
-         </button>
-         <ul class="dropdown-menu" id="profile-dropdown-menu" aria-labelledby="profile-dropdown-button">
-            <li><a class="dropdown-item" href="#">Beállítások</a></li>
-            <li>
-               <form action="{% url 'logout' %}" method="post">
-                  {% csrf_token %}
-                  <button type="submit" class="dropdown-item">Kijelentkezés</button>
-               </form>
-            </li>
-         </ul>
-      </div>
+   <div class="dropdown" id="profile-dropdown">
+      <button
+         class="btn dropdown-toggle"
+         type="button"
+         id="profile-dropdown-button"
+         data-bs-toggle="dropdown"
+         aria-expanded="false">
+         <i class="fa-solid fa-user"></i>
+      </button>
+      <ul
+         class="dropdown-menu pt-0"
+         id="profile-dropdown-menu"
+         aria-labelledby="profile-dropdown-button">
+         <li
+            ><a class="dropdown-item text-center" id="profile-username"
+               >Üdv, {{ user.username }}!</a
+            ></li
+         >
+         <li><a class="dropdown-item" href="#">Beállítások</a></li>
+         <li>
+            <form action="{% url 'logout' %}" method="post">
+               {% csrf_token %}
+               <button type="submit" class="dropdown-item">Kijelentkezés</button>
+            </form>
+         </li>
+      </ul>
+   </div>
    {% endif %}
    <div class="px-1" id="flags">
-      <img src="{% static 'img/hun-flag.png' %}" alt="Magyar zászló">
-      <img src="{% static 'img/uk-flag.png' %}" alt="Angol zászló">
+      <img src="{% static 'img/hun-flag.png' %}" alt="Magyar zászló" />
+      <img src="{% static 'img/uk-flag.png' %}" alt="Angol zászló" />
    </div>
 </nav>
