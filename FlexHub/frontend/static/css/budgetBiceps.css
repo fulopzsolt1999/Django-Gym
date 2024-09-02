@@ -1,0 +1,49 @@
+#container {
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   gap: 3rem;
+}
+
+form {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   gap: 0.5rem;
+}
+
+form .btn {
+   background-color: #c0c0c0;
+   color: #1b263b;
+   transition: all 0.3s ease;
+}
+
+form .btn:hover {
+   background-color: #00e7c9;
+   color: #1b263b;
+   -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 231, 201, 1);
+   -moz-box-shadow: 0px 0px 10px 5px rgba(0, 231, 201, 1);
+   box-shadow: 0px 0px 10px 5px rgba(0, 231, 201, 1);
+}
+
+#search-field {
+   width: 30%;
+}
+
+#gyms-container {
+   width: 100%;
+   height: 100%;
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 1rem;
+   justify-items: center;
+   align-items: center;
+}
+
+#gym-data{
+   width: 100%;
+   background-color: #415a7794;
+   border-radius: 10px;
+}
+
