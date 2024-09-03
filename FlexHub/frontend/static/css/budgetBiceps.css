@@ -6,11 +6,36 @@
 }
 
 form {
+   justify-content: center;
+   align-items: center;
+   gap: 1rem;
+}
+
+#search-container {
+   width: 35rem;
    display: flex;
    flex-direction: row;
    justify-content: center;
    align-items: center;
    gap: 0.5rem;
+}
+
+#search-container input {
+   height: 2.5rem;
+}
+
+#select-containers {
+   width: fit-content;
+}
+
+#select-containers .row {
+   justify-content: center;
+   align-items: center;
+   gap: 1rem;
+}
+
+#select-containers .input-containers {
+   width: 17rem;
 }
 
 form .btn {
@@ -27,23 +52,43 @@ form .btn:hover {
    box-shadow: 0px 0px 10px 5px rgba(0, 231, 201, 1);
 }
 
-#search-field {
-   width: 30%;
-}
-
 #gyms-container {
    width: 100%;
    height: 100%;
-   display: grid;
-   grid-template-columns: repeat(auto-fill, 1fr);
-   gap: 1rem;
-   justify-items: center;
+   gap: 1.5rem;
+   justify-content: center;
    align-items: center;
 }
 
 #gym-data{
-   width: 100%;
-   background-color: #415a7794;
+   height: 12rem;
+   width: max(25rem, calc(100% / 3 - 1rem));
+   background-color: #415a7761;
    border-radius: 10px;
+   -webkit-box-shadow: 0px 0px 10px 3px rgba(0, 231, 201, 1);
+   -moz-box-shadow: 0px 0px 10px 3px rgba(0, 231, 201, 1);
+   box-shadow: 0px 0px 10px 3px rgba(0, 231, 201, 1);
 }
 
+
+#gym-data h3 {
+   border-bottom: 3px solid #00e7c9;
+}
+
+#gym-data div {
+   height: fit-content;
+   width: fit-content;
+}
+
+#gym-data div p {
+   font-size: 110%;
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: center;
+   gap: 1rem;
+}
+
+#gym-data div p i {
+   width: 1.25rem;
+}

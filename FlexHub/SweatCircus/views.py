@@ -6,7 +6,8 @@ def MainPage(request):
 
 def GymSearch(request):
    allGymData = Gym.objects.all()
-   return render(request, "budgetBiceps.html", {"allGymData": allGymData})
+   allCityData = City.objects.all().order_by('name')
+   return render(request, "budgetBiceps.html", {"allGymData": allGymData, "allCityData": allCityData})
 
 def AboutUs(request):
    return render(request, "aboutUs.html")
