@@ -20,7 +20,7 @@
                <div class="row">
                   <div class="col-12 input-containers" id="select-city-container">
                      <select id="city-select" class="form-select" aria-label="Default select example">
-                        <option selected>Válassz egy várost:</option>
+                        <option selected id="city-option-text">Válassz egy várost:</option>
                         {% for city in allCityData %}
                            <option id="{{ city.name }}" value="{{ city.name }}">{{ city.name }}</option>
                         {% endfor %}
@@ -28,7 +28,7 @@
                   </div>
                   <div class="col-12 input-containers" id="select-price-container">
                      <select id="price-select" class="form-select" aria-label="Default select example">
-                        <option selected>Válaszd ki az árkategóriát:</option>
+                        <option selected id="price-option-text">Válaszd ki az árkategóriát:</option>
                         <option id="$" value="$">$</option>
                         <option id="$$" value="$$">$$</option>
                         <option id="$$$" value="$$$">$$$</option>
@@ -41,19 +41,19 @@
       </div>
       <div class="row m-auto" id="gyms-container">
          {% for gym in allGymData %}
-         <div class="col-4 p-2" id="gym-data">
-            <h3 class="m-1 mb-2">{{ gym.name }}</h3>
+         <div class="col-4 p-2 d-none" id="gym-data">
+            <h3 class="m-1 mb-2 ms-3">{{ gym.name }}</h3>
             <div class="m-auto mt-4 ps-3">
                <p class="m-0">
                   <i class="fa-solid fa-location-dot"></i>
-                  {{ gym.address }}
+                  <span class="gym-adress" id="{{ gym.id }}">{{ gym.address }}</span>
                </p>
                <p class="m-0">
                   <i class="fa-solid fa-link"></i>
                   <a href="{{ gym.url }}" target="_blank">Weboldal link / Facebook link</a>
                </p>
                <p class="m-0">
-                  <span class="">Árkategória:</span> {{ gym.price_group }}
+                  <span>Árkategória:</span> <span class="gym-price">{{ gym.price_group }}</span>
                </p>
             </div>
          </div>

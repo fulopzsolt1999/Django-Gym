@@ -42,7 +42,7 @@ p {
 #container {
    height: var(--max-height);
    background: rgb(65,90,119);
-   background: linear-gradient(90deg, rgba(65,90,119,1) 0%, rgba(9,9,121,1) 10%, rgba(10,14,98,1) 30%, rgba(11,17,86,1) 50%, rgba(27,38,59,1) 75%, rgba(13,27,42,1) 100%);
+   background: linear-gradient(180deg, rgba(65,90,119,1) 0%, rgba(9,9,121,1) 10%, rgba(10,14,98,1) 30%, rgba(11,17,86,1) 50%, rgba(27,38,59,1) 75%, rgba(13,27,42,1) 100%);
    background-repeat: inherit;
    background-size: cover;
 }

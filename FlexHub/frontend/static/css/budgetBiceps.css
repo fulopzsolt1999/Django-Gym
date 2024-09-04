@@ -61,7 +61,7 @@ form .btn:hover {
 }
 
 #gym-data{
-   height: 12rem;
+   height: 14rem;
    width: max(25rem, calc(100% / 3 - 1rem));
    background-color: #415a7761;
    border-radius: 10px;
