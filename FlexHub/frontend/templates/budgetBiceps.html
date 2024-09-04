@@ -19,20 +19,20 @@
             <div class="col-12 col-lg-6" id="select-containers">
                <div class="row">
                   <div class="col-12 input-containers" id="select-city-container">
-                     <select class="form-select" aria-label="Default select example">
+                     <select id="city-select" class="form-select" aria-label="Default select example">
                         <option selected>Válassz egy várost:</option>
                         {% for city in allCityData %}
-                           <option value="{{ city.id }}">{{ city.name }}</option>
+                           <option id="{{ city.name }}" value="{{ city.name }}">{{ city.name }}</option>
                         {% endfor %}
                      </select>
                   </div>
                   <div class="col-12 input-containers" id="select-price-container">
-                     <select class="form-select" aria-label="Default select example">
+                     <select id="price-select" class="form-select" aria-label="Default select example">
                         <option selected>Válaszd ki az árkategóriát:</option>
-                        <option value="1">$</option>
-                        <option value="2">$$</option>
-                        <option value="3">$$$</option>
-                        <option value="4">$$$$</option>
+                        <option id="$" value="$">$</option>
+                        <option id="$$" value="$$">$$</option>
+                        <option id="$$$" value="$$$">$$$</option>
+                        <option id="$$$$" value="$$$$">$$$$</option>
                      </select>
                   </div>
                </div>
