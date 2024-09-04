@@ -181,6 +181,11 @@ p {
 #flags img {
    height: 1.1rem;
    cursor: pointer;
+   filter: grayscale(100%);
+}
+
+#flags img.active {
+   filter: grayscale(0%);
 }
 
 /* ××××× Home section styles ××××× */
