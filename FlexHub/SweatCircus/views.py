@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import City, GymAddress, Gym, BodyGoals, Exercises
+from .models import City, GymAddress, Gym, Days, MuscleGroups, Exercises, WorkoutPlans
 
 def MainPage(request):
    return render(request, "base.html")
