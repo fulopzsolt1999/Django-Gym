@@ -100,9 +100,7 @@ p {
    transition: background-color 0.3s ease;
 }
 
-.nav-link:hover,
-#dropdown-extra-button:hover,
-#dropdown-extra-menu li a:hover {
+.nav-link:hover {
    background-color: var(--primary-bg);
    color: var(--primary-text);
 }
@@ -112,24 +110,8 @@ p {
    justify-content: right;
 }
 
-#dropdown-extra-button {
-   color: var(--primary-bg);
-   border: none;
-   margin-top: 0.4px;
-}
-
-#dropdown-extra-menu {
-   background-color: var(--secondary-text);
-   width: fit-content;
-   position: absolute;
-}
-
-#dropdown-extra-menu li a {
-   color: var(--primary-bg);
-}
-
 #profile-dropdown {
-   height: 64px;
+   margin-top: 0.875rem;
    position: absolute;
    top: 0;
    right: 8rem;
@@ -152,8 +134,7 @@ p {
 
 #profile-dropdown-menu {
    background-color: var(--secondary-text);
-   position: absolute;
-   right: 10rem;
+
 }
 
 #profile-dropdown-menu li .dropdown-item {

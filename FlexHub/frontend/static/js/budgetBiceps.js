@@ -1,52 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
    const selectedCity = document.querySelector("#city-select");
    const selectedPrice = document.querySelector("#price-select");
+   const cityOptionText = document.querySelector("#city-option-text");
+   const priceOptionText = document.querySelector("#price-option-text");
+   const gymDataContainer = document.querySelectorAll(".gym-data");
+   const gymsAddresses = document.querySelectorAll(".gym-adress");
+   const gymsPrices = document.querySelectorAll(".gym-price");
    
+   document.querySelector("#filter-btn").addEventListener("click", () => {
+      const gymData = convertGymDataToDict();
+      if (selectedCity.value !== cityOptionText.textContent && selectedPrice.value !== priceOptionText.textContent) {
+         const filteredDataByCity = filteredDataByCity(gymData);
+         showFilteredData(filteredDataByPrice(filteredDataByCity))
+      } else if (selectedCity.value !== cityOptionText.textContent) {
+         showFilteredData(filteredDataByCity(gymData));
+      } else {
+         showFilteredData(filteredDataByPrice(gymData));
+      }
+   });
    
-   selectedCity.addEventListener("change", (e) => {
-      const activeCityOption = document.querySelector(".active-city");
-      if (activeCityOption !== null){
-         if (activeCityOption.value !== e.target.value && activeCityOption.classList.contains("active-city")) {
-            activeCityOption.classList.remove("active-city");
-         }
+   function convertGymDataToDict() {
+      const gymData = [];
+      for (let i = 0; i < gymsAddresses.length; i++) {
+         gymData.push(
+            {
+               id: gymsAddresses[i].parentElement.parentElement.parentElement.id,
+               address: gymsAddresses[i].textContent.split(" ")[0],
+               price: gymsPrices[i].textContent
+            }
+         )
       }
-      document.getElementById(selectedCity.value).classList.add("active-city");
-      showFilterdGyms();
-   });
+      return gymData;
+   }
 
-   selectedPrice.addEventListener("change", (e) => {
-      const activePriceOption = document.querySelector(".active-price");
-      if (activePriceOption !== null){
-         if (activePriceOption.value !== e.target.value && activePriceOption.classList.contains("active-price")) {
-            activePriceOption.classList.remove("active-price");
-         }
-      }
-      document.getElementById(selectedPrice.value).classList.add("active-price");
-      showFilterdGyms();
-   });
+   function filteredDataByCity(gymData) {
+      const filteredGymDataByCity = [];
+      gymData.forEach(gym => {
+         if (gym.address === selectedCity.value) {
+            filteredGymDataByCity.push(gym);
+         }         
+      });
+      return filteredGymDataByCity;
+   }
 
-   function showFilterdGyms() {
-      const selectedCity = document.querySelector(".active-city");
-      const selectedPrice = document.querySelector(".active-price");
-      const gymAddresses = document.querySelectorAll(".gym-adress");
-      const gymPrices = document.querySelectorAll(".gym-price");
-      
-      for (const city of gymAddresses) {
-         if (selectedCity !== null && selectedCity.value === city.textContent.split(" ")[0]) {
-            city.parentElement.parentElement.parentElement.classList.remove("d-none");
-         } else {
-            city.parentElement.parentElement.parentElement.classList.add("d-none");
+   function filteredDataByPrice(gymData) {
+      const filteredGymDataByPrice = [];
+      gymData.forEach(gym => {
+         if (gym.price === selectedPrice.value) {
+            filteredGymDataByPrice.push(gym);
+         }         
+      });
+      return filteredGymDataByPrice;
+   }
+
+   function showFilteredData(filteredData) {
+      for (let i = 0; i < filteredData.length; i++) {
+         for (let j = 0; j < gymsAddresses.length; j++) {
+            if (filteredData[i].id !== gymsAddresses[j].parentElement.parentElement.parentElement.id && filteredData[i].address !== gymsAddresses[j].textContent.split(" ")[0]) {
+               gymsAddresses[j].parentElement.parentElement.parentElement.classList.add("d-none");
+            } else {
+               gymsAddresses[j].parentElement.parentElement.parentElement.classList.remove("d-none");
+            }
          }
       }
-      
-      /* const gymAdressesAndPrices = [[document.querySelectorAll(".gym-adress")], [document.querySelectorAll(".gym-price")]];
-      const selectedCity = document.querySelector(".active-city");
-      const selectedPrice = document.querySelector(".active-price");
-      
-      for (let i = 0; i < gymAdressesAndPrices.length; i++) {
-         if (gymAdressesAndPrices[i][0].value === selectedCity.value && gymAdressesAndPrices[i][1].value === selectedPrice.value) {
-            
-         }
-      }; */
    }
 });

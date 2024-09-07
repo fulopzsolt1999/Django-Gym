@@ -29,25 +29,8 @@
                <a class="nav-link mx-1 px-3" href="/about-us">Rólunk</a>
             </li>
             {% if user.is_authenticated %}
-            <li class="nav-item ms-3" id="container-extra">
-               <div class="dropdown" id="dropdown-extra">
-                  <button
-                     class="btn dropdown-toggle p-2"
-                     type="button"
-                     id="dropdown-extra-button"
-                     data-bs-toggle="dropdown"
-                     aria-expanded="false">
-                     Extra szolgáltatások
-                  </button>
-                  <ul
-                     class="dropdown-menu"
-                     id="dropdown-extra-menu"
-                     aria-labelledby="dropdown-extra-button">
-                     <li><a class="dropdown-item" href="#">Kalória kalkulátor</a></li>
-                     <li><a class="dropdown-item" href="#">Edzők edzéstervei</a></li>
-                     <li><a class="dropdown-item" href="#">Edzők étrendjei</a></li>
-                  </ul>
-               </div>
+            <li class="nav-item">
+               <a class="nav-link px-3" href="">Edzés terv készítő</a>
             </li>
             {% else %}
             <li class="nav-item">
@@ -69,7 +52,7 @@
          <i class="fa-solid fa-user"></i>
       </button>
       <ul
-         class="dropdown-menu pt-0"
+         class="dropdown-menu pt-0 m-0"
          id="profile-dropdown-menu"
          aria-labelledby="profile-dropdown-button">
          <li>
