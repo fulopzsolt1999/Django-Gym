@@ -35,24 +35,6 @@
          </form>
       </div>
       <div class="row m-auto" id="gyms-container">
-         {% for gym in allGymData %}
-         <div class="col-4 p-2 gym-data" id="id-{{ gym.id }}">
-            <h3 class="m-1 mb-2 ms-3">{{ gym.name }}</h3>
-            <div class="m-auto mt-4 ps-3">
-               <p class="m-0">
-                  <i class="fa-solid fa-location-dot"></i>
-                  <span class="gym-adress">{{ gym.address.city_name.name }} {{ gym.address.street }} {{ gym.address.street_number }}</span>
-               </p>
-               <p class="m-0">
-                  <i class="fa-solid fa-link"></i>
-                  <a href="{{ gym.url }}" target="_blank">Weboldal link / Facebook link</a>
-               </p>
-               <p class="m-0">
-                  <span>Árkategória:</span> <span class="gym-price">{{ gym.price_group }}</span>
-               </p>
-            </div>
-         </div>
-         {% endfor %}
       </div>
    </div>
 {% endblock content %}
