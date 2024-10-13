@@ -28,8 +28,49 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       showFilteredData(showGymIds, allGymDataIds, allGymData);
    });
+
+   priceFilterSelect.addEventListener("change", () => {
+      const priceFilter = priceFilterSelect.value;
+      const showGymIds = [];
+    
+      if (priceFilter === "increasing") {
+        allGymData.sort((a, b) => {
+          const priceA = getPriceValue(a.price_group);
+          const priceB = getPriceValue(b.price_group);
+          return priceA - priceB;
+        });
+      } else if (priceFilter === "decreasing") {
+        allGymData.sort((a, b) => {
+          const priceA = getPriceValue(a.price_group);
+          const priceB = getPriceValue(b.price_group);
+          return priceB - priceA;
+        });
+      }
+    
+      allGymData.forEach((gym) => {
+        showGymIds.push(gym.id);
+      });
+    
+      showFilteredData(showGymIds, allGymDataIds, allGymData);
+   });
+
    showFilteredData(showGymIds=allGymDataIds, allGymDataIds, allGymData);
 });
+
+function getPriceValue(priceGroup) {
+   switch (priceGroup) {
+     case "$":
+       return 1;
+     case "$$":
+       return 2;
+     case "$$$":
+       return 3;
+     case "$$$$":
+       return 4;
+     default:
+       return 0;
+   }
+ }
 
 function showFilteredData(showGymIds, allGymDataIds, allGymData) {
    const gymsContainer = document.querySelector("#gyms-container");
