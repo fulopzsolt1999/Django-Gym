@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 """ 
    5000-12000Ft -> $
@@ -59,11 +60,21 @@ class Gym(models.Model):
       template = '{0.name}'
       return template.format(self)
    
-class BodyGoals(models.Model):
+class MuscleGroups(models.Model):
    name = models.CharField(max_length=250)
 
    class Meta:
-      verbose_name_plural = 'Célok'
+      verbose_name_plural = 'Izomcsoportok'
+
+   def __str__(self):
+      template = '{0.name}'
+      return template.format(self)
+   
+class Days(models.Model):
+   name = models.CharField(max_length=250)
+
+   class Meta:
+      verbose_name_plural = 'Napok'
 
    def __str__(self):
       template = '{0.name}'
@@ -71,7 +82,7 @@ class BodyGoals(models.Model):
 
 class Exercises(models.Model):
    name = models.CharField(max_length=250)
-   muscle_group = models.CharField(max_length=250)
+   muscle_group = models.ForeignKey(MuscleGroups, on_delete=models.CASCADE)
    image = models.ImageField(default="", blank=True)
    video = models.URLField()
 
@@ -80,4 +91,20 @@ class Exercises(models.Model):
 
    def __str__(self):
       template = '{0.name}'
+      return template.format(self)
+
+class WorkoutPlans(models.Model):
+   userName = models.ForeignKey(User, on_delete=models.CASCADE)
+   day = models.ForeignKey(Days, on_delete=models.CASCADE)
+   muscleGroupName = models.ForeignKey(MuscleGroups, on_delete=models.CASCADE)
+   exerciseName = models.ForeignKey(Exercises, on_delete=models.CASCADE)
+   series = models.CharField(max_length=250)
+   reps = models.CharField(max_length=250)
+   comment = models.TextField(default="")
+
+   class Meta:
+      verbose_name_plural = 'Edzés tervek'
+
+   def __str__(self):
+      template = '{0.userName} {0.day} {0.exercise} {0.reps} {0.series} {0.comment}'
       return template.format(self)

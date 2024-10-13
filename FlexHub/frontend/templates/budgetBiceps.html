@@ -8,37 +8,36 @@
 {% endblock title %}
 {% block content %}
    {% include 'navbar.html' %}
-   <div id="container">
-      <h1>Gym Kereső</h1>
+   <div class="px-3" id="container">
+      <h1 class="text-center pt-3">Gym Kereső</h1>
       <div>
-         <form class="my-2">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search-field">
-            <button class="btn my-2 " type="submit">Search</button>
+         <form class="row my-2 p-2">
+            <div class="col-12 col-lg-6" id="select-containers">
+               <div class="row">
+                  <div class="col-12 input-containers" id="select-city-container">
+                     <input type="text" class="form-control" id="text-search" placeholder="Keresés...">
+                     <!-- <select id="city-select" class="form-select" aria-label="Default select example">
+                        <option selected id="city-option-text">Válassz egy várost:</option>
+                        {% for city in allCityData %}
+                           <option id="{{ city.name }}" value="{{ city.name }}">{{ city.name }}</option>
+                        {% endfor %}
+                     </select> -->
+                  </div>
+                  <div class="col-12 input-containers" id="select-price-container">
+                     <select id="price-select" class="form-select" aria-label="Default select example">
+                        <option selected id="price-filter">Ár kategória szerint:</option>
+                        <option value="increasing">Ár kategória szerint növekvő</option>
+                        <option value="decreasing">Ár kategória szerint csökkenő</option>
+                     </select>
+                  </div>
+               </div>
+            </div>
          </form>
       </div>
-      <div class="px-3" id="gyms-container">
-         {% for gym in allGymData %}
-         <div class="p-2" id="gym-data">
-            <h4>{{ gym.name }}</h4>
-            <div class="ps-3" id="gym-address">
-               <p class="m-0">
-                  <i class="fa-solid fa-location-dot pe-3"></i>
-                  {{ gym.address }}
-               </p>
-            </div>
-            <div class="ps-3" id="gym-url">
-               <p class="m-0">
-                  <i class="fa-solid fa-link pe-3"></i>
-                  <a href="{{ gym.url }}" target="_blank">Weboldal link / Facebook link</a>
-               </p>
-            </div>
-            <div class="ps-3" id="gym-price-group">
-               <p class="m-0">
-                  <span class="pe-3">Árkategória:</span> {{ gym.price_group }}
-               </p>
-            </div>
-         </div>
-         {% endfor %}
+      <div class="row m-auto" id="gyms-container">
       </div>
    </div>
 {% endblock content %}
+{% block js %}
+   <script src="{% static 'js/budgetBiceps.js' %}"></script>
+{% endblock js %}
