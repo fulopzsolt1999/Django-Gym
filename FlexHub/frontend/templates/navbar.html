@@ -30,7 +30,7 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-               <a class="nav-link px-3" href="">Edzés terv készítő</a>
+               <a class="nav-link px-3" href="{% url 'PremiumPump' %}">Edzés terv készítő</a>
             </li>
             {% else %}
             <li class="nav-item">

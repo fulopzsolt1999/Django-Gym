@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
    const allGymDataIds = allGymData.map(gym => gym.id);
    
    searchField.addEventListener("input", () => {
+      const gymsContainer = document.getElementById("gyms-container");
       const searchTerm = searchField.value.toLowerCase();
       let showGymIds = [];
       if (searchTerm !== "") {
@@ -25,8 +26,23 @@ document.addEventListener("DOMContentLoaded", async () => {
                return gym.id;
             }
          }).filter(id => id !== undefined);
+
+         if (showGymIds.length === 0) {
+            gymsContainer.innerHTML = "";
+            const noFoundGym = document.createElement("h3");
+            gymsContainer.style.height = "fit-content";
+            gymsContainer.classList.remove("m-auto");
+            noFoundGym.textContent = "Nincs találat!";
+            noFoundGym.classList.add("text-center");
+            noFoundGym.classList.add("mt-0");
+            gymsContainer.append(noFoundGym);
+         } else {
+            if (!gymsContainer.classList.contains("m-auto")) {
+               gymsContainer.classList.add("m-auto");
+            }
+            showFilteredData(showGymIds, allGymDataIds, allGymData);
+         }
       }
-      showFilteredData(showGymIds, allGymDataIds, allGymData);
    });
 
    priceFilterSelect.addEventListener("change", () => {
