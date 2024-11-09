@@ -20,4 +20,17 @@ def AboutUs(request):
    return render(request, "aboutUs.html")
 
 def PremiumPump(request):
-   return render(request, "premiumPump.html")
+   days = Days.objects.all()
+   workoutPlans = WorkoutPlans.objects.all()
+   return render(request, "premiumPump.html", {"content": "premiumPump", "days": days})
+
+def getSerializedWorkoutPlansData(request):
+   workoutPlans = WorkoutPlans.objects.all()
+   serializedWorkoutPlans = WorkoutPlansSerializer(workoutPlans, many=True).data
+   return JsonResponse(serializedWorkoutPlans, safe=False)
+
+def WorkoutPlanUpdate(request):
+   days = Days.objects.all()
+   muscleGroups = MuscleGroups.objects.all()
+   """ exercises = Exercises.objects.all() """
+   return render(request, "premiumPump.html", {"content": "workoutPlan", "days": days, "muscleGroups": muscleGroups})

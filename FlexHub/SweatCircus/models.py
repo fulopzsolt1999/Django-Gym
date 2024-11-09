@@ -2,25 +2,6 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 
-""" 
-   5000-12000Ft -> $
-   12000-16000Ft -> $$
-   16000-20000Ft -> $$$
-   20000Ft< -> $$$$
-
-   After registration
-      name, gender, weight, height, intolerants, body goals, comment
-
-   Trainers
-      name, gender, weight, height, work place, individual results, if trained competitor (results), prices, client capacity, comment
-
-   Workout plans
-      trainer, name, img, exercise, reps, series, comment
-
-   Workout plan images
-      workout plan name, chest, shoulder, biceps, triceps, forearm, back, glutes, thight, calf, abs
- """
-
 class City(models.Model):
    name = models.CharField(max_length=250)
 
@@ -43,7 +24,6 @@ class GymAddress(models.Model):
       template = '{0.city_name} {0.street} {0.street_number}'
       return template.format(self)
    
-
 class Gym(models.Model):
    name = models.CharField(max_length=250)
    address = models.ForeignKey(GymAddress, on_delete=models.CASCADE, default="-")
