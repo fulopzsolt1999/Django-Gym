@@ -9,6 +9,86 @@
 {% block content %} 
    <div id="container">
       {% include 'navbar.html' %}
-      <h1>Itt lehet majd létrehozni edzés terveket!</h1>
+      {% if content == "premiumPump" %}
+      <h1 class="text-center my-3">Edzés terv</h1>
+      <a href="workout-plan-update">Edzés terv módosítás</a>
+      <div id="week">
+         {% for day in days %}
+            <div class="days" id="{{ day }}">
+               <h3>{{ day }}</h3>
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Gyakorlat neve</th>
+                        <th>Szettek</th>
+                        <th>Ismétlések</th>
+                        <th>Megjegyzés</th>
+                     </tr>
+                  </thead>
+                  <tbody></tbody>
+               </table>
+            </div>
+         {% endfor %}
+      </div>
+      {% else %}
+      <h1 class="text-center my-3">Edzés terv módosítás</h1>
+      <a href="{% url 'PremiumPump' %}">Vissza az edzés tervre</a>
+      <div class="row m-auto">
+         <div class="col-6 m-auto">
+            <div id="workout-plan-form-container">
+               <form method="post">
+                  {% csrf_token %}
+                  <div id="workout-plan-form-inputs-container">
+                     <div class="workout-plan-inputs">
+                        <label for="day">Edzés terv neve:</label>
+                        <select name="day" id="day">
+                           {% for day in days %}
+                              <option value="{{ day }}">{{ day }}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <div class="workout-plan-inputs">
+                        <label for="mouscleGroup">Izom csoport:</label>
+                        <select name="mouscleGroup" id="mouscleGroup">
+                           {% for muscleGroup in muscleGroups %}
+                              <option value="{{ muscleGroup }}">{{ muscleGroup }}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <div class="workout-plan-inputs">
+                        <label for="exercise">Gyakorlat:</label>
+                        <select name="exercise" id="select">
+                           {% for exercise in exercises %}
+                              <option value="{{ exercise }}">{{ exercise }}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <div class="workout-plan-inputs">
+                        <label for="workoutPlanReps">Szettek:</label>
+                        <input type="number" name="workoutPlanReps" id="workoutPlanReps" />
+                     </div>
+                     <div class="workout-plan-inputs">
+                        <label for="workoutPlanSeries">Ismétlések:</label>
+                        <input type="number" name="workoutPlanSeries" id="workoutPlanSeries" />
+                     </div>
+                     <div class="workout-plan-inputs">
+                        <label for="comment">Megjegyzés:</label>
+                        <textarea name="comment" id="comment" rows="3" cols="20"></textarea>
+                     </div>
+                     <div class="workout-plan-inputs">
+                        <input type="submit" value="Módosítás" />
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <div class="col-6 m-auto">
+            <h3>A kiválasztott napra ha már volt korábban elmentett terv, akkor azt itt mutatjuk</h3>
+         </div>
+      </div>
+      {% endif %}
    </div>
 {% endblock content %}
+{% block js %}
+   <script src="{% static 'js/premiumPump.js' %}"></script>
+{% endblock js %}
