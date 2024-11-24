@@ -6,19 +6,20 @@ from django.shortcuts import render, redirect
 from pyexpat.errors import messages
 
 class RegistrationForm(UserCreationForm):
+   username = forms.CharField(required=True)
    email = forms.EmailField(required=True)
 
    class Meta:
       model = User
-      fields = ("username", "email", "first_name", "last_name", "password1", "password2")
+      fields = ["username", "email", "password1", "password2"]
 
 def registration_view(request):
    if request.method == "POST":
       form = RegistrationForm(request.POST)
       if form.is_valid():
-         username = form.cleaned_data.get("username")
+         """username = form.cleaned_data.get("username")
          email = form.cleaned_data.get("email")
-         # Check if username already exists
+          # Check if username already exists
          if User.objects.filter(username=username).exists():
             messages.error(request, "Username is already taken.")
             return redirect('register')
@@ -26,10 +27,14 @@ def registration_view(request):
          # Check if email already exists
          if User.objects.filter(email=email).exists():
             messages.error(request, "Email is already registered.")
-            return redirect('register')
+            return redirect('register') """
          
-         form.save()
-         return render(request, "register.html")
+         user = form.save()
+         login(request, user)
+         return redirect("index")
    else:
       form = RegistrationForm()
    return render(request, "registration/register.html", {"form": form})
+
+def index(request):
+   return render(request, "base.html")
