@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+   <style>
+      #sortable {
+         margin: 0;
+         padding: 0;
+         width: 60%;
+      }
+      #sortable li {
+         margin: 0 3px 3px 3px;
+      }
+   </style>
+{% endblock css%}
+{% block title %}
+   Edzésterv létrehozása
+{% endblock title %}
+{% block content %}
+<div id="container">
+   {% include 'navbar.html' %}
+   <div class="row">
+      <div class="col-6" id="workout-plan-update-container">
+         <h1 class="text-center my-3">Gyakorlat hozzáadása</h1>
+         <a href="{% url 'PremiumPump' %}">Vissza az edzés tervre</a>
+         <div id="workout-plan-form-container">
+            <form action="{% url 'CreateWorkoutPlan' %}" method="POST">
+               {% csrf_token %}
+               <div id="workout-plan-form-inputs-container">
+                  <div class="workout-plan-inputs">
+                     <input class="text-center" name="currentDay" id="current-day" type="text" value="{{ currentDay }}" readonly>
+                  </div>
+                  <div class="workout-plan-inputs">
+                     <label for="muscleGroups">Izom csoport:</label>
+                     <select name="muscleGroups" id="muscle-groups">
+                        <option value="" selected>Válassz...</option>
+                        {% for muscleGroup in muscleGroups %}
+                           <option value="{{ muscleGroup }}">{{ muscleGroup }}</option>
+                        {% endfor %}
+                     </select>
+                  </div>
+                  <div class="workout-plan-inputs">
+                     <label for="exercise">Gyakorlat:</label>
+                     <select name="exercise" id="exercises"></select>
+                  </div>
+                  <div class="workout-plan-inputs">
+                     <label for="workoutPlanSeries">Szettek:</label>
+                     <input type="number" name="workoutPlanSeries" id="workout-plan-series" />
+                  </div>
+                  <div class="workout-plan-inputs">
+                     <label for="workoutPlanReps">Ismétlések:</label>
+                     <input type="number" name="workoutPlanReps" id="workout-plan-reps" />
+                  </div>
+                  <div class="workout-plan-inputs">
+                     <label for="comment">Megjegyzés:</label>
+                     <textarea name="comment" id="comment" rows="3" cols="20"></textarea>
+                  </div>
+                  <div class="workout-plan-inputs">
+                     <button type="button" id="add-exercise">Hozzáadás</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+      <div class="col-6">
+         <h1>Ha már volt hozzáadva gyakorlat akkor itt láthatod és kedved szerint módosíthatod a gyakorlatokat</h1>
+         <div id="workout-plan-container">
+            {% if workoutPlans.exists %}
+            <ol id="sortable">
+               {% for workoutPlan in workoutPlans %}
+                  <li class="ui-state-default">{{workoutPlan.muscleGroupName.name}} - {{ workoutPlan.exerciseName }} - {{ workoutPlan.series }}x{{ workoutPlan.reps }} - {{ workoutPlan.comment }}</li>
+               {% endfor %}
+            </ol>
+            {% endif %}
+         </div>
+         <button type="button" id="save-workout-plan">Módosítás mentése</button>
+      </div>
+   </div>
+</div>
+{% endblock content %}
+{% block js %}
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script src="{% static 'js/premiumPump.js' %}"></script>
+   <script src="{% static 'js/createWorkoutPlan.js' %}"></script>
+{% endblock js %}

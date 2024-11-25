@@ -9,85 +9,42 @@
 {% block content %} 
    <div id="container">
       {% include 'navbar.html' %}
-         <div class="row">
-            <div class="col-6">
-               <h1 class="text-center my-3">Edzés terv</h1>
-               <div id="week">
-                  {% for day in days %}
-                     <div class="days" id="{{ day }}">
-                        <h3>{{ day }}</h3>
-                        <a type="button" id="{{ day }}" onclick="GetWorkoutDay('{{ day }}')">Gyakorlatok módosítása/hozzáadása</a>
-                        <table>
-                           <thead>
-                              <tr>
-                                 <th>Gyakorlat neve</th>
-                                 <th>Szettek</th>
-                                 <th>Ismétlések</th>
-                                 <th>Megjegyzés</th>
-                                 <th>Törlés</th>
-                              </tr>
-                           </thead>
-                           <tbody class="text-center">
-                              {% for workoutPlan in workoutPlans %}
-                                 {% if workoutPlan.day == day %}
-                                    <tr id="{{ workoutPlan.id }}">
-                                       <td>{{ workoutPlan.exerciseName }}</td>
-                                       <td>{{ workoutPlan.series }}</td>
-                                       <td>{{ workoutPlan.reps }}</td>
-                                       <td>{{ workoutPlan.comment }}</td>
-                                       <td><button type="button" onclick="DeleteWorkoutPlan('{{ workoutPlan.id }}')">Törlés</button></td>
-                                    </tr>
-                                 {% endif %}
-                              {% endfor %}
-                           </tbody>
-                        </table>
-                     </div>
-                  {% endfor %}
-               </div>
+      <h1 class="text-center my-3">Edzés terv</h1>
+      <div id="week">
+         {% for day in days %}
+            <div class="days" id="{{ day }}">
+               <h3>{{ day }}</h3>
+               <form action="{% url 'CreateWorkoutPlan' %}" method="GET">
+                  <input type="hidden" name="day" value="{{ day }}" />
+                  <button type="submit">Gyakorlatok módosítása/hozzáadása</button>
+               </form>
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Gyakorlat neve</th>
+                        <th>Szettek</th>
+                        <th>Ismétlések</th>
+                        <th>Megjegyzés</th>
+                        <th>Törlés</th>
+                     </tr>
+                  </thead>
+                  <tbody class="text-center">
+                     {% for workoutPlan in workoutPlans %}
+                        {% if workoutPlan.day == day %}
+                           <tr id="{{ workoutPlan.id }}">
+                              <td>{{ workoutPlan.exerciseName }}</td>
+                              <td>{{ workoutPlan.series }}</td>
+                              <td>{{ workoutPlan.reps }}</td>
+                              <td>{{ workoutPlan.comment }}</td>
+                              <td><button type="button" onclick="DeleteWorkoutPlan('{{ workoutPlan.id }}')">Törlés</button></td>
+                           </tr>
+                        {% endif %}
+                     {% endfor %}
+                  </tbody>
+               </table>
             </div>
-            <div class="col-6" id="workout-plan-update-container" style="display: none;">
-               <h1 class="text-center my-3">Edzés terv módosítás</h1>
-               <a href="{% url 'PremiumPump' %}">Vissza az edzés tervre</a>
-               <div id="workout-plan-form-container">
-                  <form action="{% url 'PremiumPump' %}" method="POST">
-                     {% csrf_token %}
-                     <div id="workout-plan-form-inputs-container">
-                        <div class="workout-plan-inputs">
-                           <input class="text-center" name="day" id="workout-day" type="text" value="" readonly>
-                        </div>
-                        <div class="workout-plan-inputs">
-                           <label for="muscleGroups">Izom csoport:</label>
-                           <select name="muscleGroups" id="muscleGroup">
-                              <option value="" selected>Válassz...</option>
-                              {% for muscleGroup in muscleGroups %}
-                                 <option value="{{ muscleGroup }}">{{ muscleGroup }}</option>
-                              {% endfor %}
-                           </select>
-                        </div>
-                        <div class="workout-plan-inputs">
-                           <label for="exercise">Gyakorlat:</label>
-                           <select name="exercise" id="exercises"></select>
-                        </div>
-                        <div class="workout-plan-inputs">
-                           <label for="workoutPlanSeries">Szettek:</label>
-                           <input type="number" name="workoutPlanSeries" id="workoutPlanSeries" />
-                        </div>
-                        <div class="workout-plan-inputs">
-                           <label for="workoutPlanReps">Ismétlések:</label>
-                           <input type="number" name="workoutPlanReps" id="workoutPlanReps" />
-                        </div>
-                        <div class="workout-plan-inputs">
-                           <label for="comment">Megjegyzés:</label>
-                           <textarea name="comment" id="comment" rows="3" cols="20"></textarea>
-                        </div>
-                        <div class="workout-plan-inputs">
-                           <input type="submit" value="Hozzáadás" />
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
+         {% endfor %}
+      </div>
    </div>
 {% endblock content %}
 {% block js %}

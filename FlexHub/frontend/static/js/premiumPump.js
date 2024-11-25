@@ -26,8 +26,6 @@ async function FetchExercisesData() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-   
-   const USER = document.querySelector("#profile-username").textContent.replace(/\s|\!/g, '').split(",")[1];
    const allWorkoutPlans = await fetchWorkoutsData();
    const exercises = await FetchExercisesData();
    const muscleGroup = document.querySelector("#muscleGroup");
@@ -61,11 +59,6 @@ document.addEventListener("DOMContentLoaded", async () => {
    
 });
 
-function GetWorkoutDay(day) {
-   document.querySelector("#workout-plan-update-container").style.display = "block";
-   document.querySelector("#workout-day").value = day;
-};
-
 function DeleteWorkoutPlan(workoutPlanId) {
    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
    const request = new Request(
@@ -78,4 +71,3 @@ function DeleteWorkoutPlan(workoutPlanId) {
       window.location.reload();
    });
 }
-

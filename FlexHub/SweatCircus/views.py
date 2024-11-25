@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from .models import City, GymAddress, Gym, Days, MuscleGroups, Exercises, WorkoutPlans
 from .serializers import CitySerializer, GymAddressSerializer, GymSerializer, DaysSerializer, MuscleGroupsSerializer, ExercisesSerializer, WorkoutPlansSerializer
+import json
 
 def MainPage(request):
    return render(request, "base.html")
@@ -22,26 +23,35 @@ def AboutUs(request):
 
 def PremiumPump(request):
    days = Days.objects.all()
+   workoutPlans = WorkoutPlans.objects.all()
+ 
+   return render(request, "premiumPump.html", {"days": days, "workoutPlans": workoutPlans})
+
+def CreateWorkoutPlan(request):
+   days = Days.objects.all()
    muscleGroups = MuscleGroups.objects.all()
    exercises = Exercises.objects.all()
    workoutPlans = WorkoutPlans.objects.all()
 
    if request.method == "POST":
-      userName = User.objects.get(username=request.user.username)
-      
-      dayForm = days.get(name=request.POST.get("day"))
-      muscleGroupForm = muscleGroups.get(name=request.POST.get("muscleGroups"))
-      exerciseForm = exercises.get(name=request.POST.get("exercise"))
-      seriesForm = request.POST.get("workoutPlanSeries")
-      repsForm = request.POST.get("workoutPlanReps")
-      commentForm = request.POST.get("comment")
-      
-      newWorkoutPlan = WorkoutPlans(userName=userName, day=dayForm, muscleGroupName=muscleGroupForm, exerciseName=exerciseForm, series=seriesForm, reps=repsForm, comment=commentForm)
-      newWorkoutPlan.save()
+      exercisesJson = json.loads(request.body.decode('utf-8'))
+      for exercise in exercisesJson:
+         userName = User.objects.get(username=exercise["user_name"])
+         day = days.get(name=exercise["day"])
+         muscleGroup = muscleGroups.get(name=exercise["muscle_group_name"])
+         exerciseName = exercises.get(name=exercise["exercise_name"]) 
+         series = exercise["series"]
+         reps = exercise["reps"]
+         comment = exercise["comment"]
+         newWorkoutPlan = WorkoutPlans(userName=userName, day=day, muscleGroupName=muscleGroup, exerciseName=exerciseName, series=series, reps=reps, comment=comment)
+         newWorkoutPlan.save()
 
       return redirect("PremiumPump")
-      
-   return render(request, "premiumPump.html", {"days": days, "muscleGroups": muscleGroups, "workoutPlans": workoutPlans})
+
+   elif request.method == "GET":
+      getCurrentDay = Days.objects.get(name=request.GET.get("day"))
+
+      return render(request, "creatingWorkoutPlan.html", {"currentDay": getCurrentDay, "muscleGroups": muscleGroups, "exercises": exercises, "workoutPlans": workoutPlans})
 
 def deleteWorkoutPlan(request, id):
    workoutPlans = WorkoutPlans.objects.all()
