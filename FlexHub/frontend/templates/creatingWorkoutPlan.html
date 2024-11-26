@@ -6,10 +6,21 @@
       #sortable {
          margin: 0;
          padding: 0;
-         width: 60%;
+         width: fit-content;
       }
       #sortable li {
          margin: 0 3px 3px 3px;
+      }
+      .show-exercises {
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         gap: 1rem;
+         width: 100%;
+      }
+      .ui-state-default {
+         background-color: #415a77;
+         color: #ffffff;
       }
    </style>
 {% endblock css%}
@@ -68,7 +79,10 @@
             {% if workoutPlans.exists %}
             <ol id="sortable">
                {% for workoutPlan in workoutPlans %}
-                  <li class="ui-state-default">{{workoutPlan.muscleGroupName.name}} - {{ workoutPlan.exerciseName }} - {{ workoutPlan.series }}x{{ workoutPlan.reps }} - {{ workoutPlan.comment }}</li>
+                  <div class="ui-state-default show-exercises my-3">
+                     <li id="ex-{{workoutPlan.id}}">{{workoutPlan.muscleGroupName.name}} - {{ workoutPlan.exerciseName }} - {{ workoutPlan.series }}x{{ workoutPlan.reps }} - {{ workoutPlan.comment }}</li>
+                     <button type="button" onclick="DeleteExercise('{{ workoutPlan.id }}')">Törlés</button>
+                  </div>
                {% endfor %}
             </ol>
             {% endif %}

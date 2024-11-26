@@ -14,12 +14,14 @@ document.querySelector("#add-exercise").addEventListener("click", () => {
    document.querySelector("#sortable").appendChild(li);
 });
 
+function DeleteExercise(id) {
+   const li = document.querySelector(`#ex-${id}`).parentElement;
+   li.remove();
+}
+
 document.querySelector("#save-workout-plan").addEventListener("click", () => {
    const workoutPlans = document.querySelectorAll("#sortable li");
-   
-   
    const workoutPlanData = Array.from(workoutPlans).map(li => {
-      console.log(document.querySelector("#muscle-groups").value);
       return {
          user_name: document.querySelector("#profile-username").textContent.replace(/\s|\!/g, '').split(",")[1],
          day: document.querySelector("#current-day").value,
@@ -39,6 +41,6 @@ document.querySelector("#save-workout-plan").addEventListener("click", () => {
       method: "POST",
       body: JSON.stringify(workoutPlanData)
    }).then(() => {
-      //window.location.reload();
+      window.location.reload();
    });
 })
