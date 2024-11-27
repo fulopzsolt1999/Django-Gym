@@ -86,5 +86,5 @@ class WorkoutPlans(models.Model):
       verbose_name_plural = 'Edzés tervek'
 
    def __str__(self):
-      template = '{0.userName} {0.day} {0.exercise} {0.reps} {0.series} {0.comment}'
+      template = '{0.id} {0.userName}'
       return template.format(self)

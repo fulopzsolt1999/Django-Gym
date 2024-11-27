@@ -35,16 +35,22 @@ def CreateWorkoutPlan(request):
 
    if request.method == "POST":
       exercisesJson = json.loads(request.body.decode('utf-8'))
+      """ TODO : MEGNÉZNI MIÉRT NEM MŰKÖDIK EGYSZERRE TÖBB EXERCISE HOZZÁADÁSA """
+      count = 0
       for exercise in exercisesJson:
          userName = User.objects.get(username=exercise["user_name"])
          day = days.get(name=exercise["day"])
-         muscleGroup = muscleGroups.get(name=exercise["muscle_group_name"])
-         exerciseName = exercises.get(name=exercise["exercise_name"]) 
-         series = exercise["series"]
-         reps = exercise["reps"]
-         comment = exercise["comment"]
-         newWorkoutPlan = WorkoutPlans(userName=userName, day=day, muscleGroupName=muscleGroup, exerciseName=exerciseName, series=series, reps=reps, comment=comment)
-         newWorkoutPlan.save()
+         count+1
+         for workoutPlan in workoutPlans:
+            if workoutPlan.userName == userName and workoutPlan.day == day and workoutPlan.id != exercise["id"]:
+               exerciseId = workoutPlan.id+count
+               muscleGroup = muscleGroups.get(name=exercise["muscle_group_name"])
+               exerciseName = exercises.get(name=exercise["exercise_name"]) 
+               series = exercise["series"]
+               reps = exercise["reps"]
+               comment = exercise["comment"]
+               newWorkoutPlan = WorkoutPlans(id=exerciseId, userName=userName, day=day, muscleGroupName=muscleGroup, exerciseName=exerciseName, series=series, reps=reps, comment=comment)
+               newWorkoutPlan.save()
 
       return redirect("PremiumPump")
 
@@ -53,7 +59,7 @@ def CreateWorkoutPlan(request):
 
       return render(request, "creatingWorkoutPlan.html", {"currentDay": getCurrentDay, "muscleGroups": muscleGroups, "exercises": exercises, "workoutPlans": workoutPlans})
 
-def deleteWorkoutPlan(request, id):
+def DeleteExercise(request, id):
    workoutPlans = WorkoutPlans.objects.all()
    workoutPlans.filter(id=id).delete()
    return redirect("PremiumPump")

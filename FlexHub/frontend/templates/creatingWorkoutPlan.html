@@ -78,10 +78,10 @@
          <div id="workout-plan-container">
             {% if workoutPlans.exists %}
             <ol id="sortable">
-               {% for workoutPlan in workoutPlans %}
+               {% for exercise in workoutPlans %}
                   <div class="ui-state-default show-exercises my-3">
-                     <li id="ex-{{workoutPlan.id}}">{{workoutPlan.muscleGroupName.name}} - {{ workoutPlan.exerciseName }} - {{ workoutPlan.series }}x{{ workoutPlan.reps }} - {{ workoutPlan.comment }}</li>
-                     <button type="button" onclick="DeleteExercise('{{ workoutPlan.id }}')">Törlés</button>
+                     <li id="ex-{{exercise.id}}"><span hidden>{{exercise.id}}</span> - {{exercise.muscleGroupName.name}} - {{ exercise.exerciseName }} - {{ exercise.series }}x{{ exercise.reps }} - {{ exercise.comment }}</li>
+                     <button type="button" onclick="DeleteExercise('{{ exercise.id }}')">Törlés</button>
                   </div>
                {% endfor %}
             </ol>
