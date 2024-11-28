@@ -28,7 +28,6 @@ async function FetchExercisesData() {
 document.addEventListener("DOMContentLoaded", async () => {
    const exercises = await FetchExercisesData();
    const muscleGroup = document.querySelector("#muscle-groups");
-
    if (muscleGroup) {
       muscleGroup.addEventListener("input", () => {
          const select = document.querySelector("#exercises");
@@ -49,7 +48,6 @@ document.addEventListener("DOMContentLoaded", async () => {
          }
       });
    }
-   
 });
 
 $(function() {
@@ -65,52 +63,52 @@ document.querySelector("#add-exercise").addEventListener("click", () => {
    const comment = document.querySelector("#comment").value;
    const div = document.createElement("div");
    const li = document.createElement("li");
-   const span = document.createElement("span");
    const button = document.createElement("button");
-   span.hidden = true;
-   span.textContent = "0";
+   li.textContent = `${muscleGroup} - ${exercise} - ${series}x${reps} - ${comment}`;
    button.type = "button";
    button.textContent = "Törlés";
-   button.setAttribute("onclick", `DeleteExercise('${li.id}')`);
+   button.setAttribute("onclick", `DeleteExercise('${exercise.split(" ").join("").split("(")[0]}')`);
    div.className = "ui-state-default show-exercises my-3";
-   li.appendChild(span);
-   li.textContent = ` - ${muscleGroup} - ${exercise} - ${series}x${reps} - ${comment}`;
+   div.id = `ex-${exercise.split(" ").join("").split("(")[0]}`;
    div.appendChild(li);
    div.appendChild(button);
    document.querySelector("#sortable").appendChild(div);
 });
 
 function DeleteExercise(exerciseId) {
-   const li = document.querySelector(`#ex-${exerciseId}`).parentElement;
-   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-   li.remove();
-   const request = new Request(
-      `http://127.0.0.1:8000/deleteExercise/${exerciseId}`,
-      {headers: {'X-CSRFToken': csrftoken}}
-   );
-   fetch(request, {
-      method: "DELETE"
-   }).then(() => {
-      window.location.reload();
-   });
+   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;   
+   if (Number(exerciseId)) {
+      const div = document.querySelector(`#ex-${exerciseId}`);
+      const request = new Request(
+         `http://127.0.0.1:8000/deleteExercise/${exerciseId}`,
+         {headers: {'X-CSRFToken': csrftoken}}
+      );
+      fetch(request, {
+         method: "DELETE"
+      }).then(() => {
+         window.location.reload();
+      });
+      div.remove();
+   } else {
+      const div = document.querySelector(`#ex-${exerciseId}`);
+      div.remove();
+   }
 }
-
-//
 
 document.querySelector("#save-workout-plan").addEventListener("click", () => {
    const workoutExercises = document.querySelectorAll("#sortable li");
    const workoutPlanData = Array.from(workoutExercises).map(li => {
       return {
-         id: li.textContent.split(" - ")[0],
          user_name: document.querySelector("#profile-username").textContent.replace(/\s|\!/g, '').split(",")[1],
          day: document.querySelector("#current-day").value,
-         muscle_group_name: li.textContent.split(" - ")[1],
-         exercise_name: li.textContent.split(" - ")[2],
-         series: li.textContent.split(" - ")[3].split("x")[0],
-         reps: li.textContent.split(" - ")[3].split("x")[1].split(" - ")[0],
-         comment: li.textContent.split(" - ")[4]
+         muscle_group_name: li.textContent.split(" - ")[0],
+         exercise_name: li.textContent.split(" - ")[1],
+         series: li.textContent.split(" - ")[2].split("x")[0],
+         reps: li.textContent.split(" - ")[2].split("x")[1].split(" - ")[0],
+         comment: li.textContent.split(" - ")[3]
       }
    });
+   
    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
    const request = new Request(
       "http://127.0.0.1:8000/createWorkoutPlan/",
@@ -120,6 +118,7 @@ document.querySelector("#save-workout-plan").addEventListener("click", () => {
       method: "POST",
       body: JSON.stringify(workoutPlanData)
    }).then(() => {
+      document.querySelector("#workout-plan-form").reset();
       window.location.reload();
    });
 })

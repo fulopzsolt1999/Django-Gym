@@ -35,22 +35,21 @@ def CreateWorkoutPlan(request):
 
    if request.method == "POST":
       exercisesJson = json.loads(request.body.decode('utf-8'))
-      """ TODO : MEGNÉZNI MIÉRT NEM MŰKÖDIK EGYSZERRE TÖBB EXERCISE HOZZÁADÁSA """
-      count = 0
+      newWorkoutPlan = []
       for exercise in exercisesJson:
          userName = User.objects.get(username=exercise["user_name"])
          day = days.get(name=exercise["day"])
-         count+1
-         for workoutPlan in workoutPlans:
-            if workoutPlan.userName == userName and workoutPlan.day == day and workoutPlan.id != exercise["id"]:
-               exerciseId = workoutPlan.id+count
-               muscleGroup = muscleGroups.get(name=exercise["muscle_group_name"])
-               exerciseName = exercises.get(name=exercise["exercise_name"]) 
-               series = exercise["series"]
-               reps = exercise["reps"]
-               comment = exercise["comment"]
-               newWorkoutPlan = WorkoutPlans(id=exerciseId, userName=userName, day=day, muscleGroupName=muscleGroup, exerciseName=exerciseName, series=series, reps=reps, comment=comment)
-               newWorkoutPlan.save()
+         muscleGroup = muscleGroups.get(name=exercise["muscle_group_name"])
+         exerciseName = exercises.get(name=exercise["exercise_name"]) 
+         series = exercise["series"]
+         reps = exercise["reps"]
+         comment = exercise["comment"]
+         newWorkoutPlan.append(WorkoutPlans(userName=userName, day=day, muscleGroupName=muscleGroup, exerciseName=exerciseName, series=series, reps=reps, comment=comment))
+
+      previousExercises = [exercise.exerciseName for exercise in workoutPlans]
+      for newExercise in newWorkoutPlan:
+         if newExercise.exerciseName not in previousExercises:
+            newExercise.save()
 
       return redirect("PremiumPump")
 

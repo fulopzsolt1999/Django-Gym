@@ -35,7 +35,7 @@
          <h1 class="text-center my-3">Gyakorlat hozzáadása</h1>
          <a href="{% url 'PremiumPump' %}">Vissza az edzés tervre</a>
          <div id="workout-plan-form-container">
-            <form action="{% url 'CreateWorkoutPlan' %}" method="POST">
+            <form action="{% url 'CreateWorkoutPlan' %}" id="workout-plan-form" method="POST">
                {% csrf_token %}
                <div id="workout-plan-form-inputs-container">
                   <div class="workout-plan-inputs">
@@ -79,8 +79,8 @@
             {% if workoutPlans.exists %}
             <ol id="sortable">
                {% for exercise in workoutPlans %}
-                  <div class="ui-state-default show-exercises my-3">
-                     <li id="ex-{{exercise.id}}"><span hidden>{{exercise.id}}</span> - {{exercise.muscleGroupName.name}} - {{ exercise.exerciseName }} - {{ exercise.series }}x{{ exercise.reps }} - {{ exercise.comment }}</li>
+                  <div class="ui-state-default show-exercises my-3" id="ex-{{exercise.id}}">
+                     <li>{{exercise.muscleGroupName.name}} - {{ exercise.exerciseName }} - {{ exercise.series }}x{{ exercise.reps }} - {{ exercise.comment }}</li>
                      <button type="button" onclick="DeleteExercise('{{ exercise.id }}')">Törlés</button>
                   </div>
                {% endfor %}
