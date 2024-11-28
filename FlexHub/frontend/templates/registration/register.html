@@ -1,13 +1,15 @@
 {% extends 'base.html' %} {% load static %} {% block css %}
-<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+<!-- <link rel="stylesheet" href="{% static 'css/register.css' %}" /> -->
 {% endblock css%} {% block title %} Regisztráció {% endblock title %} {% block content %}
 <div id="container">
    {% include 'navbar.html' %}
    <div id="register-container">
-      <form action="{% url 'login' %}" method="post">
-         {% csrf_token %}
+      <form action="{% url 'register' %}" method="POST">
+         
          <h1 class="text-center">Regisztráció</h1>
-         <div id="input-container">
+         {% csrf_token %}
+         {{ form }}
+         <!-- <div id="input-container">
             <div class="row">
                <p class="col-md-6 my-0 inputs">
                   <label for="id_username">Felhasználónév:</label>
@@ -80,13 +82,13 @@
                      id="id_password2" />
                </p>
             </div>
-         </div>
-         <button type="submit" class="btn disabled mt-3">Regisztráció</button>
+         </div> -->
+         <button type="submit" class="btn mt-3">Regisztráció</button>
          <a id="already-registered" href="{% url 'login' %}">Korábban már regisztráltál?</a>
       </form>
    </div>
    {% include "footer.html" %}
 </div>
 {% endblock content %} {% block js %}
-<script src="{% static 'js/register.js' %}"></script>
+<!-- <script src="{% static 'js/register.js' %}"></script> -->
 {% endblock js %}
