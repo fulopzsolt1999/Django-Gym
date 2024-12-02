@@ -1,0 +1,80 @@
+#workout-plan-update-container{
+   display: flex;
+   flex-direction: column;
+}
+
+#back-to-premium-pump {
+   width: 100%;
+}
+
+#back-to-premium-pump .btn {
+   width: 20rem;
+   margin-right: 16px;
+   background-color: #c0c0c0;
+   color: #0d1b2a;
+   float: right;
+   transition: all 0.3s ease;
+}
+
+.workout-plan-inputs {
+   width: 60%;
+   margin: auto;
+}
+
+.workout-plan-inputs input,
+.workout-plan-inputs select,
+.workout-plan-inputs textarea {
+   background-color: #c0c0c0;
+   color: #0d1b2a;
+   border: none;
+}
+
+.workout-plan-inputs input:focus,
+.workout-plan-inputs select:focus,
+.workout-plan-inputs textarea:focus {
+   background-color: #415a77;
+   color: #ffffff;
+}
+
+#workout-plan-form-inputs-container .btn {
+   background-color: #415a77;
+   border: none;
+   transition: all 0.3s ease;
+}
+
+#workout-plan-form-inputs-container .btn:hover,
+#back-to-premium-pump .btn:hover {
+   background-color: #00e7c9;
+   color: #0d1b2a;
+}
+
+#current-day {
+   font-size: 20px;
+   background-color: #415a77;
+   color: #ffffff;
+   border: none;
+}
+
+#workout-plan-list-container{}
+
+
+
+#sortable {
+   margin: 0;
+   padding: 0;
+   width: fit-content;
+}
+#sortable li {
+   margin: 0 3px 3px 3px;
+}
+.show-exercises {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   gap: 1rem;
+   width: 100%;
+}
+.ui-state-default {
+   background-color: #415a77;
+   color: #ffffff;
+}

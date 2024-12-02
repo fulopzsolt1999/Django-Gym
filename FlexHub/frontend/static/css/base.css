@@ -122,8 +122,10 @@ p {
 }
 
 #profile-username {
-   background-color: var(--primary-bg);
+   background-color: var(--secondary-bg);
    color: var(--primary-text) !important;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
 }
 
 #profile-dropdown-button {
@@ -134,7 +136,7 @@ p {
 
 #profile-dropdown-menu {
    background-color: var(--secondary-text);
-
+   border-radius: 10px;
 }
 
 #profile-dropdown-menu li .dropdown-item {

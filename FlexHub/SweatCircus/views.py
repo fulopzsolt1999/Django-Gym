@@ -24,12 +24,7 @@ def AboutUs(request):
 def PremiumPump(request):
    days = Days.objects.all()
    workoutPlans = WorkoutPlans.objects.all()
-   exercises = []
-   for workoutPlan in workoutPlans:
-      exercises.append(Exercises.objects.filter(name=workoutPlan.exerciseName).values())
-   for exercise in exercises:
-      print(exercise[0])
-   return render(request, "premiumPump.html", {"days": days, "workoutPlans": workoutPlans, "exercises": exercises})
+   return render(request, "premiumPump.html", {"days": days, "workoutPlans": workoutPlans})
 
 def CreateWorkoutPlan(request):
    days = Days.objects.all()

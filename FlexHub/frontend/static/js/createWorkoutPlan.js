@@ -26,28 +26,57 @@ async function FetchExercisesData() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-   const exercises = await FetchExercisesData();
+   const allExercises = await FetchExercisesData();
    const muscleGroup = document.querySelector("#muscle-groups");
-   if (muscleGroup) {
-      muscleGroup.addEventListener("input", () => {
-         const select = document.querySelector("#exercises");
-         if (muscleGroup.value !== "") {
-            select.innerHTML = "";
-            const selectedMuscleGroup = muscleGroup.value;
-            const filteredExercises = exercises.filter(exercise => exercise.muscleGroup.name === selectedMuscleGroup
-            );
-            
-            filteredExercises.forEach(exercise => {
-               const option = document.createElement("option");
-               option.value = exercise.name;
-               option.textContent = exercise.name;
-               select.appendChild(option);
-            });
-         } else {
-            select.innerHTML = "";
-         }
-      });
-   }
+   const selectExercise = document.querySelector("#exercises");
+   document.querySelector("#workout-plan-form").reset();
+
+   muscleGroup.addEventListener("input", () => {
+      if (muscleGroup.value !== "") {
+         document.querySelector("#exercises-form-container").hidden = false;
+         selectExercise.innerHTML = "";
+         const selectedMuscleGroup = muscleGroup.value;
+         const filteredExercises = allExercises.filter(exercise => exercise.muscleGroup.name === selectedMuscleGroup
+         );
+         const option = document.createElement("option");
+         option.value = "";
+         option.textContent = "Válassz...";
+         selectExercise.appendChild(option);
+         filteredExercises.forEach(exercise => {
+            const option = document.createElement("option");
+            option.value = exercise.name;
+            option.textContent = exercise.name;
+            selectExercise.appendChild(option);
+         });
+      } else {
+         document.querySelector("#exercises-form-container").hidden = true;
+         const imgVideoContainer = document.querySelector("#exercise-image-video");
+         imgVideoContainer.setAttribute("hidden", true);
+      }
+   });
+
+   selectExercise.addEventListener("input", () => {
+      const imgVideoContainer = document.querySelector("#exercise-image-video");
+      imgVideoContainer.innerHTML = "";
+      const selectedExerciseName = selectExercise.value;
+      const exercise = allExercises.find(exercise => exercise.name === selectedExerciseName);
+      if (exercise) {
+         const img = document.createElement("img");
+         const a = document.createElement("a");
+         const h4 = document.createElement("h4");
+         h4.textContent = "Kattints a képre, ha érdekel a videó a gyakorlat bemutatásáról!";
+         a.href = exercise.video;
+         a.target = "_blank";
+         img.src = exercise.image;
+         img.alt = exercise.name;
+         img.width = 400;
+         img.height = 300;
+         a.appendChild(img);
+         imgVideoContainer.appendChild(h4);
+         imgVideoContainer.appendChild(a);
+      }
+      imgVideoContainer.removeAttribute("hidden");
+   });
 });
 
 $(function() {

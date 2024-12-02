@@ -60,11 +60,10 @@
                Üdv, {{ user.username }}!
             </a>
          </li>
-         <li><a class="dropdown-item" href="#">Beállítások</a></li>
          <li>
             <form action="{% url 'logout' %}" method="post">
                {% csrf_token %}
-               <button type="submit" class="dropdown-item" id="logout">Kijelentkezés</button>
+               <button type="submit" class="dropdown-item text-center" id="logout">Kijelentkezés</button>
             </form>
          </li>
       </ul>
