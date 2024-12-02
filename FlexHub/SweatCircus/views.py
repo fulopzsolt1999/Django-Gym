@@ -24,8 +24,12 @@ def AboutUs(request):
 def PremiumPump(request):
    days = Days.objects.all()
    workoutPlans = WorkoutPlans.objects.all()
- 
-   return render(request, "premiumPump.html", {"days": days, "workoutPlans": workoutPlans})
+   exercises = []
+   for workoutPlan in workoutPlans:
+      exercises.append(Exercises.objects.filter(name=workoutPlan.exerciseName).values())
+   for exercise in exercises:
+      print(exercise[0])
+   return render(request, "premiumPump.html", {"days": days, "workoutPlans": workoutPlans, "exercises": exercises})
 
 def CreateWorkoutPlan(request):
    days = Days.objects.all()
@@ -45,8 +49,8 @@ def CreateWorkoutPlan(request):
          reps = exercise["reps"]
          comment = exercise["comment"]
          newWorkoutPlan.append(WorkoutPlans(userName=userName, day=day, muscleGroupName=muscleGroup, exerciseName=exerciseName, series=series, reps=reps, comment=comment))
+      previousExercises = [exercise.exerciseName for exercise in workoutPlans if newWorkoutPlan[0].day == exercise.day]
 
-      previousExercises = [exercise.exerciseName for exercise in workoutPlans]
       for newExercise in newWorkoutPlan:
          if newExercise.exerciseName not in previousExercises:
             newExercise.save()

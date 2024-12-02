@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
-
+   <style>
+      .exercise-image { position: relative; display: inline-block; } .bubble { display: none; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); z-index: 10; background-color: #fff; border: 1px solid #ccc; border-radius: 10px; padding: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); } .exercise-image:hover .bubble { display: block; }
+   </style>
 {% endblock css%}
 {% block title %}
    Edzésterv
@@ -25,7 +27,7 @@
                         <th>Szettek</th>
                         <th>Ismétlések</th>
                         <th>Megjegyzés</th>
-                        <th>Törlés</th>
+                        <th>Kép</th>
                      </tr>
                   </thead>
                   <tbody class="text-center">
@@ -36,6 +38,17 @@
                               <td>{{ workoutPlan.series }}</td>
                               <td>{{ workoutPlan.reps }}</td>
                               <td>{{ workoutPlan.comment }}</td>
+                              <td class="exercise-image">
+                                 {% for exercise in exercises %}
+                                    {% if exercise.name == workoutPlan.exerciseName %}
+                                       <i class="fa-regular fa-image"></i>
+                                       <div class="bubble">
+                                          <img src="../static/img/Exercises/{{ exercise.image }}" alt="{{ exercise.exerciseName }} kép" width="200" height="200">
+                                       </div>
+                                    {% endif %}
+                                 {% endfor %}
+                                 </div>
+                              </td>
                            </tr>
                         {% endif %}
                      {% endfor %}
@@ -43,6 +56,10 @@
                </table>
             </div>
          {% endfor %}
+         
       </div>
    </div>
 {% endblock content %}
+{% block js %}
+   <script src="{% static 'js/premiumPump.js' %}"></script>
+{% endblock js %}
