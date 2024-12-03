@@ -12,9 +12,9 @@
    {% include 'navbar.html' %}
    <div class="row">
       <div class="col-6" id="workout-plan-update-container">
-         <h1 class="text-center my-3">Gyakorlat hozzáadása</h1>
+         <h2 class="text-center my-3">Gyakorlat hozzáadása</h2>
          <div id="back-to-premium-pump">
-            <a href="{% url 'PremiumPump' %}" class="btn">Vissza az edzés tervre</a>
+            <a href="{% url 'PremiumPump' %}" class="btn">Vissza az edzés tervekre</a>
          </div>
          <div id="workout-plan-form-container">
             <form action="{% url 'CreateWorkoutPlan' %}" id="workout-plan-form" class="m-auto px-3" method="POST">
@@ -55,22 +55,33 @@
          </div>
       </div>
       <div class="col-6" id="workout-plan-list-container">
-         <h1>Ha már volt hozzáadva gyakorlat akkor itt láthatod és kedved szerint módosíthatod a gyakorlatokat</h1>
+         <h2 class="my-3 text-center">A {{ currentDay }}i naphoz tartozó gyakorlatok</h2>
          <div id="workout-plan-container">
             {% if workoutPlans.exists %}
             <ol id="sortable">
                {% for exercise in workoutPlans %}
                   {% if exercise.day == currentDay %}
                      <div class="ui-state-default show-exercises my-3" id="ex-{{exercise.id}}">
-                        <li>{{exercise.muscleGroupName.name}} - {{ exercise.exerciseName }} - {{ exercise.series }}x{{ exercise.reps }} - {{ exercise.comment }}</li>
-                        <button type="button" onclick="DeleteExercise('{{ exercise.id }}')">Törlés</button>
+                        <!-- <li>{{exercise.muscleGroupName.name}} - {{ exercise.exerciseName }} - {{ exercise.series }}x{{ exercise.reps }} - {{ exercise.comment }}</li> -->
+                        <li class="ps-3 pt-2">
+                           <dl>
+                              <dt class="border-bottom border-3 mb-2">{{ exercise.exerciseName }}</dt>
+                              <dd class="ps-3">- {{ exercise.muscleGroupName.name }}</dd>
+                              <dd class="ps-3">- {{ exercise.series }} szett</dd>
+                              <dd class="ps-3">- {{ exercise.reps }} ismétlés</dd>
+                              <dd class="ps-3">- {{ exercise.comment }}</dd>
+                           </dl>
+                        </li> 
+                        <button type="button" class="btn btn-danger" onclick="DeleteExercise('{{ exercise.id }}')">Törlés</button>
                      </div>
                   {% endif %}
                {% endfor %}
             </ol>
             {% endif %}
          </div>
-         <button type="button" id="save-workout-plan">Módosítás mentése</button>
+         <div class="d-flex justify-content-center">
+            <button type="button" id="save-workout-plan" class="btn btn-success w-50">Módosítás mentése</button>
+         </div>
       </div>
    </div>
 </div>

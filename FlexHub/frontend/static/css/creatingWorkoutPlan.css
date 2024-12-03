@@ -38,12 +38,13 @@
 
 #workout-plan-form-inputs-container .btn {
    background-color: #415a77;
+   color: #ffffff;
    border: none;
    transition: all 0.3s ease;
 }
 
-#workout-plan-form-inputs-container .btn:hover,
-#back-to-premium-pump .btn:hover {
+#workout-plan-form-inputs-container .btn:hover
+#workout-plan-list-container #save-workout-plan:hover {
    background-color: #00e7c9;
    color: #0d1b2a;
 }
@@ -57,24 +58,17 @@
 
 #workout-plan-list-container{}
 
-
-
 #sortable {
-   margin: 0;
-   padding: 0;
-   width: fit-content;
 }
 #sortable li {
-   margin: 0 3px 3px 3px;
+   
 }
-.show-exercises {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   gap: 1rem;
-   width: 100%;
-}
+
 .ui-state-default {
    background-color: #415a77;
    color: #ffffff;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   border: none;
 }

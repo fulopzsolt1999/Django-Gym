@@ -85,22 +85,44 @@ $(function() {
 });
 
 document.querySelector("#add-exercise").addEventListener("click", () => {
-   const muscleGroup = document.querySelector("#muscle-groups").value;
+   const addedDDValues = [
+      document.querySelector("#muscle-groups").value,
+      document.querySelector("#workout-plan-reps").value,
+      document.querySelector("#workout-plan-series").value,
+      document.querySelector("#comment").value
+   ]
    const exercise = document.querySelector("#exercises").value;
-   const reps = document.querySelector("#workout-plan-reps").value;
-   const series = document.querySelector("#workout-plan-series").value;
-   const comment = document.querySelector("#comment").value;
+   const engExerciseNameInOne = exercise.split(" ").join("").split("(")[0];
+   
    const div = document.createElement("div");
    const li = document.createElement("li");
+   const dl = document.createElement("dl");
+   const dt = document.createElement("dt");
    const button = document.createElement("button");
-   li.textContent = `${muscleGroup} - ${exercise} - ${series}x${reps} - ${comment}`;
+
+   dt.textContent = exercise;
+   dt.classList.add("border-bottom", "border-3", "mb-2");
+   dl.appendChild(dt);
+   addedDDValues.forEach(value => {
+      const dd = document.createElement("dd");
+      dd.textContent = `- ${value}`;
+      dd.classList.add("ps-3");
+      dl.appendChild(dd);
+   });
+
+   li.classList.add("ps-3", "pt-2");
+   li.appendChild(dl);
+
    button.type = "button";
    button.textContent = "Törlés";
-   button.setAttribute("onclick", `DeleteExercise('${exercise.split(" ").join("").split("(")[0]}')`);
+   button.classList.add("btn", "btn-danger");
+   button.setAttribute("onclick", `DeleteExercise('${exercise.engExerciseNameInOne}')`);
+
    div.className = "ui-state-default show-exercises my-3";
-   div.id = `ex-${exercise.split(" ").join("").split("(")[0]}`;
+   div.id = `ex-${engExerciseNameInOne}`;
    div.appendChild(li);
    div.appendChild(button);
+
    document.querySelector("#sortable").appendChild(div);
 });
 
