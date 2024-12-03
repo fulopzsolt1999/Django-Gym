@@ -103,11 +103,19 @@ document.querySelector("#add-exercise").addEventListener("click", () => {
    dt.textContent = exercise;
    dt.classList.add("border-bottom", "border-3", "mb-2");
    dl.appendChild(dt);
+   let counter = 0;
    addedDDValues.forEach(value => {
       const dd = document.createElement("dd");
-      dd.textContent = `- ${value}`;
+      if (counter === 1) {
+         dd.textContent = `- ${value} szett`;
+      } else if (counter === 2) {
+         dd.textContent = `- ${value} ismétlés`;
+      } else {
+         dd.textContent = `- ${value}`;
+      }
       dd.classList.add("ps-3");
       dl.appendChild(dd);
+      counter++;
    });
 
    li.classList.add("ps-3", "pt-2");
@@ -127,7 +135,7 @@ document.querySelector("#add-exercise").addEventListener("click", () => {
 });
 
 function DeleteExercise(exerciseId) {
-   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;   
+   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
    if (Number(exerciseId)) {
       const div = document.querySelector(`#ex-${exerciseId}`);
       const request = new Request(
@@ -147,19 +155,7 @@ function DeleteExercise(exerciseId) {
 }
 
 document.querySelector("#save-workout-plan").addEventListener("click", () => {
-   const workoutExercises = document.querySelectorAll("#sortable li");
-   const workoutPlanData = Array.from(workoutExercises).map(li => {
-      return {
-         user_name: document.querySelector("#profile-username").textContent.replace(/\s|\!/g, '').split(",")[1],
-         day: document.querySelector("#current-day").value,
-         muscle_group_name: li.textContent.split(" - ")[0],
-         exercise_name: li.textContent.split(" - ")[1],
-         series: li.textContent.split(" - ")[2].split("x")[0],
-         reps: li.textContent.split(" - ")[2].split("x")[1].split(" - ")[0],
-         comment: li.textContent.split(" - ")[3]
-      }
-   });
-   
+   const workoutPlanData = GetFetchableWorkoutExerciseData();
    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
    const request = new Request(
       "http://127.0.0.1:8000/createWorkoutPlan/",
@@ -172,4 +168,21 @@ document.querySelector("#save-workout-plan").addEventListener("click", () => {
       document.querySelector("#workout-plan-form").reset();
       window.location.reload();
    });
-})
+});
+
+function GetFetchableWorkoutExerciseData() {
+   const workoutExercises = document.querySelectorAll("#sortable li dl");
+   const result = [];
+   for (let i = 0; i < workoutExercises.length; i++) {
+      result.push({
+         user_name: document.querySelector("#profile-username").textContent.replace(/\s|\!/g, '').split(",")[1],
+         day: document.querySelector("#current-day").value,
+         exercise_name: workoutExercises[i].textContent.trim().split("-").map(item => item.trim())[0],
+         muscle_group_name: workoutExercises[i].textContent.trim().split("-").map(item => item.trim())[1],
+         series: workoutExercises[i].textContent.trim().split("-").map(item => item.trim())[2].split(" ")[0],
+         reps: workoutExercises[i].textContent.trim().split("-").map(item => item.trim())[3].split(" ")[0],
+         comment: workoutExercises[i].textContent.trim().split("-").map(item => item.trim())[4]
+      })
+   }
+   return result;
+}
