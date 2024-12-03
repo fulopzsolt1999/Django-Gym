@@ -23,3 +23,5 @@ document.addEventListener("DOMContentLoaded", () => {
       });
    })
 });
+
+const username = document.querySelector("#profile-username").textContent.replace(/\s|\!/g, '').split(",")[1];

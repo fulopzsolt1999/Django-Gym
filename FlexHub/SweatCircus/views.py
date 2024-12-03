@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
-from .models import City, GymAddress, Gym, Days, MuscleGroups, Exercises, WorkoutPlans
+from .models import City, GymAddress, Gym, Days, MuscleGroups, Exercises, WorkoutPlans, IsRestDay
 from .serializers import CitySerializer, GymAddressSerializer, GymSerializer, DaysSerializer, MuscleGroupsSerializer, ExercisesSerializer, WorkoutPlansSerializer
 import json
 
@@ -24,7 +24,9 @@ def AboutUs(request):
 def PremiumPump(request):
    days = Days.objects.all()
    workoutPlans = WorkoutPlans.objects.all()
-   return render(request, "premiumPump.html", {"days": days, "workoutPlans": workoutPlans})
+   restDays = IsRestDay.objects.all()
+
+   return render(request, "premiumPump.html", {"days": days, "workoutPlans": workoutPlans}, {"restDays": restDays})
 
 def CreateWorkoutPlan(request):
    days = Days.objects.all()
