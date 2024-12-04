@@ -24,9 +24,24 @@ def AboutUs(request):
 def PremiumPump(request):
    days = Days.objects.all()
    workoutPlans = WorkoutPlans.objects.all()
-   restDays = IsRestDay.objects.all()
+   restDays = [restDay.day.name for restDay in IsRestDay.objects.filter(userName=User.objects.get(username=request.user.username))]
+   return render(request, "premiumPump.html", {"days": days, "workoutPlans": workoutPlans, "restDays": restDays})
 
-   return render(request, "premiumPump.html", {"days": days, "workoutPlans": workoutPlans}, {"restDays": restDays})
+def SetRestDay(request):
+   days = Days.objects.all()
+   isRestDay = IsRestDay.objects.all()
+
+   if request.method == "POST":
+      isRestDayJson = json.loads(request.body.decode('utf-8'))
+
+      currentData = isRestDay.filter(userName=User.objects.get(username=isRestDayJson["username"]), day=days.get(name=isRestDayJson["day"]))
+
+      if currentData.exists():
+         currentData.delete()
+      else:
+         isRestDay = IsRestDay(userName=User.objects.get(username=isRestDayJson["username"]), day=days.get(name=isRestDayJson["day"]))
+         isRestDay.save()
+      return redirect("PremiumPump")
 
 def CreateWorkoutPlan(request):
    days = Days.objects.all()

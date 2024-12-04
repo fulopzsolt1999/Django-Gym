@@ -13,19 +13,23 @@
          <h1 class="text-center my-3">Edzés terv</h1>
          <div id="week">
             {% for day in days %}
-               <div class="days" id="{{ day }}">
-                  <h2 class="my-3 ps-2 pb-1 w-25">{{ day }}</h2>
+               <div class="days" id="{{ day.name }}">
+                  <h2 class="my-3 ps-2 pb-1 w-25">{{ day.name }}</h2>
                   <form action="{% url 'CreateWorkoutPlan' %}" method="GET" id="workout-plan-modify-form">
-                     <input type="hidden" name="day" value="{{ day }}" />
+                     <input type="hidden" name="day" value="{{ day.name }}" />
                      <div class="form-check form-switch">
-                        <input type="checkbox" class="form-check-input is-rest-day" name="is-rest-day" value="{{ day }}">
+                        {% if day.name in restDays %}
+                           <input type="checkbox" class="form-check-input is-rest-day" name="is-rest-day" value="{{ day.name }}" checked>
+                        {% else %}
+                           <input type="checkbox" class="form-check-input is-rest-day" name="is-rest-day" value="{{ day.name }}">
+                        {% endif %}
                         <h4>
                            <label class="form-check-label" for="is-rest-day">Pihenőnap</label>
                         </h4>
                      </div>
-                     <button type="submit" id="btn-{{ day }}" class="btn btn-primary mb-2">Gyakorlatok módosítása/hozzáadása</button>
+                     <button type="submit" id="btn-{{ day.name }}" class="btn btn-primary mb-2">Gyakorlatok módosítása/hozzáadása</button>
                   </form>
-                  <table id="table-{{ day }}" class="table table-striped table-hover table-bordered table-dark text-center my-3">
+                  <table id="table-{{ day.name }}" class="table table-striped table-hover table-bordered table-dark text-center my-3">
                      <thead>
                         <tr>
                            <th>Gyakorlat neve</th>

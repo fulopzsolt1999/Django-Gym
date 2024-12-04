@@ -92,11 +92,10 @@ class WorkoutPlans(models.Model):
 class IsRestDay(models.Model):
    userName = models.ForeignKey(User, on_delete=models.CASCADE)
    day = models.ForeignKey(Days, on_delete=models.CASCADE)
-   bool = models.BooleanField(default=False)
 
    class Meta:
       verbose_name_plural = 'Pihenőnap'
 
    def __str__(self):
-      template = '{0.id} {0.userName}'
+      template = '{0.userName} {0.day}'
       return template.format(self)
