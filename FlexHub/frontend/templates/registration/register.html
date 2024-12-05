@@ -5,84 +5,9 @@
    {% include 'navbar.html' %}
    <div id="register-container">
       <form action="{% url 'register' %}" method="POST">
-         
          <h1 class="text-center">Regisztráció</h1>
          {% csrf_token %}
-         {{ form }}
-         <!-- <div id="input-container">
-            <div class="row">
-               <p class="col-md-6 my-0 inputs">
-                  <label for="id_username">Felhasználónév:</label>
-                  <input
-                     type="text"
-                     name="username"
-                     maxlength="150"
-                     autofocus=""
-                     required=""
-                     aria-describedby="id_username_helptext"
-                     class="form-control"
-                     id="id_username" />
-                  <span class="form-text error m-0 p-0" id="id_username_error"></span>
-               </p>
-               <p class="col-md-6 my-0 inputs">
-                  <label for="id_email">Email cím:</label>
-                  <input
-                     type="email"
-                     name="email"
-                     maxlength="320"
-                     required=""
-                     class="form-control"
-                     id="id_email" />
-                  <span class="form-text error m-0 p-0" id="id_email_error"></span>
-               </p>
-            </div>
-            <div class="row">
-               <p class="col-md-6 my-0 inputs">
-                  <label for="id_first_name">Vezetéknév:</label>
-                  <input
-                     type="text"
-                     name="first_name"
-                     maxlength="150"
-                     class="form-control"
-                     id="id_first_name" />
-                  <span class="form-text error m-0 p-0" id="id_first_name_error"></span>
-               </p>
-               <p class="col-md-6 my-0 inputs">
-                  <label for="id_last_name">Keresztnév:</label>
-                  <input
-                     type="text"
-                     name="last_name"
-                     maxlength="150"
-                     class="form-control"
-                     id="id_last_name" />
-                  <span class="form-text error m-0 p-0" id="id_last_name_error"></span>
-               </p>
-            </div>
-
-            <div class="row">
-               <p class="col-md-6 my-0 inputs">
-                  <label for="id_password1">Jelszó:</label>
-                  <input
-                     type="password"
-                     name="password1"
-                     autocomplete="new-password"
-                     aria-describedby="id_password1_helptext"
-                     class="form-control"
-                     id="id_password1" />
-                  <span class="form-text error m-0 p-0" id="id_password_error"></span>
-               </p>
-               <p class="col-md-6 my-0 inputs">
-                  <label for="id_password2">Jelszó megerősítése:</label>
-                  <input
-                     type="password"
-                     name="password2"
-                     autocomplete="new-password"
-                     aria-describedby="id_password2_helptext"
-                     class="form-control"
-                     id="id_password2" />
-               </p>
-            </div>
-         </div> -->
+         {{form}}
          <button type="submit" class="btn mt-3">Regisztráció</button>
          <a id="already-registered" href="{% url 'login' %}">Korábban már regisztráltál?</a>
       </form>
@@ -90,5 +15,5 @@
    {% include "footer.html" %}
 </div>
 {% endblock content %} {% block js %}
-<!-- <script src="{% static 'js/register.js' %}"></script> -->
+   <script src="{% static 'js/register.js' %}"></script>
 {% endblock js %}
