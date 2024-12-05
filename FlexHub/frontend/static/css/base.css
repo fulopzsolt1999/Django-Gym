@@ -114,7 +114,7 @@ p {
    margin-top: 0.875rem;
    position: absolute;
    top: 0;
-   right: 8rem;
+   right: 3rem;
    display: flex;
    flex-direction: row;
    justify-content: center;
@@ -139,6 +139,11 @@ p {
    border-radius: 10px;
 }
 
+.dropdown-menu[data-bs-popper] {
+   position: absolute;
+   left: -6.5rem;
+}
+
 #profile-dropdown-menu li .dropdown-item {
    color: var(--primary-bg);
    transition: all 0.3s ease;
@@ -147,28 +152,6 @@ p {
 #profile-dropdown-menu li .dropdown-item:hover {
    background-color: var(--primary-bg);
    color: var(--primary-text);
-}
-
-#flags {
-   height: 64px;
-   position: absolute;
-   top: 0;
-   right: 4.7rem;
-   display: flex;
-   flex-direction: row;
-   gap: 0.5rem;
-   justify-content: center;
-   align-items: center;
-}
-
-#flags img {
-   height: 1.1rem;
-   cursor: pointer;
-   filter: grayscale(100%);
-}
-
-#flags img.active {
-   filter: grayscale(0%);
 }
 
 /* ××××× Home section styles ××××× */
@@ -211,6 +194,7 @@ p {
 }
 
 #home-buttons {
+   margin-top: -15px;
    width: fit-content;
    height: 100%;
    display: flex;
