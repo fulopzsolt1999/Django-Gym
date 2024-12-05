@@ -173,6 +173,7 @@ document.querySelector("#save-workout-plan").addEventListener("click", () => {
 function GetFetchableWorkoutExerciseData() {
    const workoutExercises = document.querySelectorAll("#sortable li dl");
    const result = [];
+   console.log(workoutExercises[0].textContent.trim().split("-").map(item => item.trim())[0]);
    for (let i = 0; i < workoutExercises.length; i++) {
       result.push({
          user_name: document.querySelector("#profile-username").textContent.replace(/\s|\!/g, '').split(",")[1],

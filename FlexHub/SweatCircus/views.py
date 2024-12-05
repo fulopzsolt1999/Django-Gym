@@ -60,12 +60,12 @@ def CreateWorkoutPlan(request):
          series = exercise["series"]
          reps = exercise["reps"]
          comment = exercise["comment"]
-         newWorkoutPlan.append(WorkoutPlans(userName=userName, day=day, muscleGroupName=muscleGroup, exerciseName=exerciseName, series=series, reps=reps, comment=comment))
-      previousExercises = [exercise.exerciseName for exercise in workoutPlans if newWorkoutPlan[0].day == exercise.day]
-
-      for newExercise in newWorkoutPlan:
-         if newExercise.exerciseName not in previousExercises:
-            newExercise.save()
+         if exerciseName not in newWorkoutPlan:
+            newWorkoutPlan.append(WorkoutPlans(userName=userName, day=day, muscleGroupName=muscleGroup, exerciseName=exerciseName, series=series, reps=reps, comment=comment))
+      previousWorkoutPlan = workoutPlans.filter(userName=User.objects.get(username=exercisesJson[0]["user_name"]), day=newWorkoutPlan[0].day)
+      previousWorkoutPlan.delete()
+      for workoutPlan in newWorkoutPlan:
+         workoutPlan.save()
 
       return redirect("PremiumPump")
 
