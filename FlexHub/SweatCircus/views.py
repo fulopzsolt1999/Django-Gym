@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
-from .models import City, GymAddress, Gym, Days, MuscleGroups, Exercises, WorkoutPlans
+from .models import City, GymAddress, Gym, Days, MuscleGroups, Exercises, WorkoutPlans, IsRestDay
 from .serializers import CitySerializer, GymAddressSerializer, GymSerializer, DaysSerializer, MuscleGroupsSerializer, ExercisesSerializer, WorkoutPlansSerializer
 import json
 
@@ -24,8 +24,24 @@ def AboutUs(request):
 def PremiumPump(request):
    days = Days.objects.all()
    workoutPlans = WorkoutPlans.objects.all()
- 
-   return render(request, "premiumPump.html", {"days": days, "workoutPlans": workoutPlans})
+   restDays = [restDay.day.name for restDay in IsRestDay.objects.filter(userName=User.objects.get(username=request.user.username))]
+   return render(request, "premiumPump.html", {"days": days, "workoutPlans": workoutPlans, "restDays": restDays})
+
+def SetRestDay(request):
+   days = Days.objects.all()
+   isRestDay = IsRestDay.objects.all()
+
+   if request.method == "POST":
+      isRestDayJson = json.loads(request.body.decode('utf-8'))
+
+      currentData = isRestDay.filter(userName=User.objects.get(username=isRestDayJson["username"]), day=days.get(name=isRestDayJson["day"]))
+
+      if currentData.exists():
+         currentData.delete()
+      else:
+         isRestDay = IsRestDay(userName=User.objects.get(username=isRestDayJson["username"]), day=days.get(name=isRestDayJson["day"]))
+         isRestDay.save()
+      return redirect("PremiumPump")
 
 def CreateWorkoutPlan(request):
    days = Days.objects.all()
@@ -44,12 +60,12 @@ def CreateWorkoutPlan(request):
          series = exercise["series"]
          reps = exercise["reps"]
          comment = exercise["comment"]
-         newWorkoutPlan.append(WorkoutPlans(userName=userName, day=day, muscleGroupName=muscleGroup, exerciseName=exerciseName, series=series, reps=reps, comment=comment))
-
-      previousExercises = [exercise.exerciseName for exercise in workoutPlans]
-      for newExercise in newWorkoutPlan:
-         if newExercise.exerciseName not in previousExercises:
-            newExercise.save()
+         if exerciseName not in newWorkoutPlan:
+            newWorkoutPlan.append(WorkoutPlans(userName=userName, day=day, muscleGroupName=muscleGroup, exerciseName=exerciseName, series=series, reps=reps, comment=comment))
+      previousWorkoutPlan = workoutPlans.filter(userName=User.objects.get(username=exercisesJson[0]["user_name"]), day=newWorkoutPlan[0].day)
+      previousWorkoutPlan.delete()
+      for workoutPlan in newWorkoutPlan:
+         workoutPlan.save()
 
       return redirect("PremiumPump")
 
