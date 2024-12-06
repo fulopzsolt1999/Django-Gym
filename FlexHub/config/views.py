@@ -49,10 +49,10 @@ def registration_view(request):
          print(User.objects.filter(email=form.cleaned_data['email']))
          if User.objects.filter(email=form.cleaned_data['email']).exists():
             form.add_error('email', "Ezzel az email címmel már regisztráltak!")
-            return render(request, 'register.html', {'form': form})
+            return render(request, 'registration/register.html', {'form': form})
          else:
-            """ user = form.save()
-            login(request, user) """
+            user = form.save()
+            login(request, user)
             return redirect("index")
    else:
       form = RegistrationForm()
