@@ -45,10 +45,15 @@ class CustomLoginView(LoginView):
 def registration_view(request):
    if request.method == "POST":
       form = RegistrationForm(request.POST)
-      if form.is_valid():         
-         user = form.save()
-         login(request, user)
-         return redirect("index")
+      if form.is_valid():
+         print(User.objects.filter(email=form.cleaned_data['email']))
+         if User.objects.filter(email=form.cleaned_data['email']).exists():
+            form.add_error('email', "Ezzel az email címmel már regisztráltak!")
+            return render(request, 'register.html', {'form': form})
+         else:
+            """ user = form.save()
+            login(request, user) """
+            return redirect("index")
    else:
       form = RegistrationForm()
    return render(request, "registration/register.html", {"form": form})
