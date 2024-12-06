@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
-
+   <link rel="stylesheet" href="{% static 'css/premiumPump.css' %}" />
 {% endblock css%}
 {% block title %}
    Edzésterv
@@ -9,40 +9,61 @@
 {% block content %} 
    <div id="container">
       {% include 'navbar.html' %}
-      <h1 class="text-center my-3">Edzés terv</h1>
-      <div id="week">
-         {% for day in days %}
-            <div class="days" id="{{ day }}">
-               <h3>{{ day }}</h3>
-               <form action="{% url 'CreateWorkoutPlan' %}" method="GET">
-                  <input type="hidden" name="day" value="{{ day }}" />
-                  <button type="submit">Gyakorlatok módosítása/hozzáadása</button>
-               </form>
-               <table>
-                  <thead>
-                     <tr>
-                        <th>Gyakorlat neve</th>
-                        <th>Szettek</th>
-                        <th>Ismétlések</th>
-                        <th>Megjegyzés</th>
-                        <th>Törlés</th>
-                     </tr>
-                  </thead>
-                  <tbody class="text-center">
-                     {% for workoutPlan in workoutPlans %}
-                        {% if workoutPlan.day == day %}
-                           <tr id="{{ workoutPlan.id }}">
-                              <td>{{ workoutPlan.exerciseName }}</td>
-                              <td>{{ workoutPlan.series }}</td>
-                              <td>{{ workoutPlan.reps }}</td>
-                              <td>{{ workoutPlan.comment }}</td>
-                           </tr>
+      <div class="container">
+         <h1 class="text-center my-3">Edzés terv</h1>
+         <div id="week">
+            {% for day in days %}
+               <div class="days" id="{{ day.name }}">
+                  <h2 class="my-3 ps-2 pb-1 w-25">{{ day.name }}</h2>
+                  <form action="{% url 'CreateWorkoutPlan' %}" method="GET" id="workout-plan-modify-form">
+                     <input type="hidden" name="day" value="{{ day.name }}" />
+                     <div class="form-check form-switch">
+                        {% if day.name in restDays %}
+                           <input type="checkbox" class="form-check-input is-rest-day" name="is-rest-day" value="{{ day.name }}" checked>
+                        {% else %}
+                           <input type="checkbox" class="form-check-input is-rest-day" name="is-rest-day" value="{{ day.name }}">
                         {% endif %}
-                     {% endfor %}
-                  </tbody>
-               </table>
-            </div>
-         {% endfor %}
+                        <h4>
+                           <label class="form-check-label" for="is-rest-day">Pihenőnap</label>
+                        </h4>
+                     </div>
+                     <button type="submit" id="btn-{{ day.name }}" class="btn btn-primary mb-2">Gyakorlatok módosítása/hozzáadása</button>
+                  </form>
+                  <table id="table-{{ day.name }}" class="table table-striped table-hover table-bordered table-dark text-center my-3">
+                     <thead>
+                        <tr>
+                           <th>Gyakorlat neve</th>
+                           <th>Szettek</th>
+                           <th>Ismétlések</th>
+                           <th>Megjegyzés</th>
+                           <th>Kép</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for workoutPlan in workoutPlans %}
+                           {% if workoutPlan.day == day %}
+                              <tr id="{{ workoutPlan.id }}">
+                                 <td>{{ workoutPlan.exerciseName }}</td>
+                                 <td>{{ workoutPlan.series }}</td>
+                                 <td>{{ workoutPlan.reps }}</td>
+                                 <td>{{ workoutPlan.comment }}</td>
+                                 <td class="exercise-image">
+                                    <i class="fa-regular fa-image"></i>
+                                    <div class="bubble">
+                                       <img src="../static/img/Exercises/{{ workoutPlan.exerciseName.image }}" alt="{{ workoutPlan.exerciseName }} kép" width="200" height="150">
+                                    </div>
+                                 </td>
+                              </tr>
+                           {% endif %}
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </div>
+            {% endfor %}
+         </div>
       </div>
    </div>
 {% endblock content %}
+{% block js %}
+   <script src="{% static 'js/premiumPump.js' %}"></script>
+{% endblock js %}

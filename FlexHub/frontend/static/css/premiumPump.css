@@ -1,0 +1,64 @@
+#week {
+   display: flex;
+   flex-direction: column;
+   flex-wrap: wrap;
+}
+
+.days {
+   display: flex;
+   flex-direction: column;
+}
+
+.days h2 {
+   border-bottom: 3px solid #00e7c9;
+}
+
+.form-check-input {
+   background-color: #415a77;
+}
+
+.form-check-input:checked {
+   background-color: #00e7c9;
+}
+
+#workout-plan-modify-form {
+   height: 2.5rem;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+}
+
+#workout-plan-modify-form .btn {
+   width: 30rem;
+   background-color: #415a77;
+   border: none;
+   transition: all 0.3s ease;
+}
+
+#workout-plan-modify-form .btn:hover {
+   background-color: #00e7c9;
+   color: #0d1b2a;
+}
+
+.exercise-image {
+   width: 100%;
+   position: relative;
+   display: inline-block;
+}
+.bubble {
+   display: none;
+   position: absolute;
+   top: -10px;
+   left: 50%;
+   transform: translateX(20%);
+   z-index: 10;
+   background-color: #fff;
+   border: 1px solid #ccc;
+   border-radius: 10px;
+   padding: 5px;
+   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.exercise-image:hover .bubble {
+   display: block;
+}

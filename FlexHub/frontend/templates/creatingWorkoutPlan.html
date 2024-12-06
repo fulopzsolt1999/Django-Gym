@@ -2,27 +2,7 @@
 {% load static %}
 {% block css %}
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
-   <style>
-      #sortable {
-         margin: 0;
-         padding: 0;
-         width: fit-content;
-      }
-      #sortable li {
-         margin: 0 3px 3px 3px;
-      }
-      .show-exercises {
-         display: flex;
-         flex-direction: row;
-         justify-content: space-between;
-         gap: 1rem;
-         width: 100%;
-      }
-      .ui-state-default {
-         background-color: #415a77;
-         color: #ffffff;
-      }
-   </style>
+   <link rel="stylesheet" href="{% static 'css/creatingWorkoutPlan.css' %}" />
 {% endblock css%}
 {% block title %}
    Edzésterv létrehozása
@@ -31,63 +11,76 @@
 <div id="container">
    {% include 'navbar.html' %}
    <div class="row">
-      <div class="col-6" id="workout-plan-update-container">
-         <h1 class="text-center my-3">Gyakorlat hozzáadása</h1>
-         <a href="{% url 'PremiumPump' %}">Vissza az edzés tervre</a>
+      <div class="col-xl-6 col-12" id="workout-plan-update-container">
+         <h2 class="text-center my-3">Gyakorlat hozzáadása</h2>
+         <div id="back-to-premium-pump">
+            <a href="{% url 'PremiumPump' %}" class="btn">Vissza az edzés tervekre</a>
+         </div>
          <div id="workout-plan-form-container">
-            <form action="{% url 'CreateWorkoutPlan' %}" id="workout-plan-form" method="POST">
+            <form action="{% url 'CreateWorkoutPlan' %}" id="workout-plan-form" class="m-auto px-3" method="POST">
                {% csrf_token %}
                <div id="workout-plan-form-inputs-container">
-                  <div class="workout-plan-inputs">
-                     <input class="text-center" name="currentDay" id="current-day" type="text" value="{{ currentDay }}" readonly>
+                  <div class="form-group">
+                     <input class="form-control text-center my-3" name="currentDay" id="current-day" type="text" value="{{ currentDay }}" readonly>
                   </div>
-                  <div class="workout-plan-inputs">
+                  <div class="form-group workout-plan-inputs">
                      <label for="muscleGroups">Izom csoport:</label>
-                     <select name="muscleGroups" id="muscle-groups">
+                     <select name="muscleGroups" id="muscle-groups" class="form-control">
                         <option value="" selected>Válassz...</option>
                         {% for muscleGroup in muscleGroups %}
                            <option value="{{ muscleGroup }}">{{ muscleGroup }}</option>
                         {% endfor %}
                      </select>
                   </div>
-                  <div class="workout-plan-inputs">
+                  <div class="form-group workout-plan-inputs" id="exercises-form-container" hidden>
                      <label for="exercise">Gyakorlat:</label>
-                     <select name="exercise" id="exercises"></select>
+                     <select name="exercise" id="exercises" class="form-control"></select>
                   </div>
-                  <div class="workout-plan-inputs">
+                  <div class="form-group workout-plan-inputs">
                      <label for="workoutPlanSeries">Szettek:</label>
-                     <input type="number" name="workoutPlanSeries" id="workout-plan-series" />
+                     <input type="number" name="workoutPlanSeries" id="workout-plan-series" class="form-control" />
                   </div>
-                  <div class="workout-plan-inputs">
+                  <div class="form-group workout-plan-inputs">
                      <label for="workoutPlanReps">Ismétlések:</label>
-                     <input type="number" name="workoutPlanReps" id="workout-plan-reps" />
+                     <input type="number" name="workoutPlanReps" id="workout-plan-reps" class="form-control" />
                   </div>
-                  <div class="workout-plan-inputs">
+                  <div class="form-group workout-plan-inputs">
                      <label for="comment">Megjegyzés:</label>
-                     <textarea name="comment" id="comment" rows="3" cols="20"></textarea>
+                     <textarea name="comment" id="comment" class="form-control" rows="3" cols="20"></textarea>
                   </div>
-                  <div class="workout-plan-inputs">
-                     <button type="button" id="add-exercise">Hozzáadás</button>
-                  </div>
+                  <button type="button" id="add-exercise" class="btn btn-primary w-100 my-4">Hozzáadás</button>
                </div>
             </form>
+            <div id="exercise-image-video" hidden></div>
          </div>
       </div>
-      <div class="col-6">
-         <h1>Ha már volt hozzáadva gyakorlat akkor itt láthatod és kedved szerint módosíthatod a gyakorlatokat</h1>
-         <div id="workout-plan-container">
+      <div class="col-xl-6 col-12">
+         <h2 class="my-3 text-center">A {{ currentDay }}i naphoz tartozó gyakorlatok</h2>
+         <div id="workout-plan-container" class="p-3">
             {% if workoutPlans.exists %}
             <ol id="sortable">
                {% for exercise in workoutPlans %}
-                  <div class="ui-state-default show-exercises my-3" id="ex-{{exercise.id}}">
-                     <li>{{exercise.muscleGroupName.name}} - {{ exercise.exerciseName }} - {{ exercise.series }}x{{ exercise.reps }} - {{ exercise.comment }}</li>
-                     <button type="button" onclick="DeleteExercise('{{ exercise.id }}')">Törlés</button>
-                  </div>
+                  {% if exercise.day == currentDay %}
+                     <div class="ui-state-default show-exercises my-3" id="ex-{{exercise.id}}">
+                        <li class="ps-3 pt-2">
+                           <dl>
+                              <dt class="border-bottom border-3 mb-2">{{ exercise.exerciseName }}</dt>
+                              <dd class="ps-3">- {{ exercise.muscleGroupName.name }}</dd>
+                              <dd class="ps-3">- {{ exercise.series }} szett</dd>
+                              <dd class="ps-3">- {{ exercise.reps }} ismétlés</dd>
+                              <dd class="ps-3">- {{ exercise.comment }}</dd>
+                           </dl>
+                        </li> 
+                        <button type="button" class="btn btn-danger my-auto" id="delete-exercise-btn" onclick="DeleteExercise('{{ exercise.id }}')">Törlés</button>
+                     </div>
+                  {% endif %}
                {% endfor %}
             </ol>
             {% endif %}
          </div>
-         <button type="button" id="save-workout-plan">Módosítás mentése</button>
+         <div class="d-flex justify-content-center">
+            <button type="button" id="save-workout-plan" class="btn btn-success w-50">Módosítás mentése</button>
+         </div>
       </div>
    </div>
 </div>
@@ -95,6 +88,5 @@
 {% block js %}
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script src="{% static 'js/premiumPump.js' %}"></script>
    <script src="{% static 'js/createWorkoutPlan.js' %}"></script>
 {% endblock js %}
