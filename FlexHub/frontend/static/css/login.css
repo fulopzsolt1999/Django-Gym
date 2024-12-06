@@ -1,18 +1,15 @@
-#login-container {
-   height: calc(100% - 74px);
-   width: min(35rem, 80%);
-   margin: auto;
+#container {
+   height: calc(100% - 89.6px);
+}
+
+#form-container {
    display: flex;
-   flex-direction: column;
-   align-items: center;
    justify-content: center;
-   gap: 1rem;
 }
 
 form {
+   width: 50%;
    background-color: #1b263b;
-   width: 100%;
-   padding: 1rem;
    border-radius: 10px;
    display: flex;
    flex-direction: column;
@@ -24,8 +21,7 @@ form {
 }
 
 form h1 {
-   width: 100%;
-   border-bottom: #00e7c9 2px solid;
+   border-bottom: #00e7c9 3px solid;
 }
 
 .form-control {
@@ -55,20 +51,48 @@ form .btn:hover {
 }
 
 #form-links a {
-   width: fit-content;
    color: #00e7c9;
    text-decoration: none;
    padding-bottom: 2px;
-   display: inline-block;
    background-image: linear-gradient(#00e7c9 0 0);
-   background-position: 0 100%; /*OR bottom left*/
+   background-position: 0 100%;
    background-size: 0% 2px;
    background-repeat: no-repeat;
    text-decoration: none;
-   transition: background-size 0.3s, background-position 0s 0.3s; /*change after the size immediately*/
+   transition: background-size 0.3s, background-position 0s 0.3s;
 }
 
 #form-links a:hover {
-   background-position: 100% 100%; /*OR bottom right*/
+   background-position: 100% 100%;
    background-size: 100% 2px;
+}
+
+@media screen and (max-width: 600px) {
+   form {
+      width: 75%;
+   }
+}
+
+@media screen and (max-width: 500px) {
+   form h1 {
+      font-size: 1.5rem;
+   }
+   #form-links {
+      font-size: 0.8rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+   }
+}
+
+@media screen and (max-width: 400px) {
+   form {
+      width: 90%;
+   }
+   form h1 {
+      font-size: 1.3rem;
+   }
+   #form-links {
+      font-size: 0.7rem;
+   }
 }
