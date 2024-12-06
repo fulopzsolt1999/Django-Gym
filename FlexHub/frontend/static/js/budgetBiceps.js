@@ -146,10 +146,10 @@ function createGymsContainerContent(gym) {
     gymDataDiv.appendChild(pTag);
   });
 
-  h3Tag.classList.add("m-1", "mb-2", "ms-3");
+  h3Tag.classList.add("mx-2", "mt-2", "mb-0", "ps-2", "pb-1");
   h3Tag.textContent = gym.name;
 
-  gymDataDiv.classList.add("m-auto", "mt-4", "ps-3");
+  gymDataDiv.classList.add("m-auto", "w-fit-content");
 
   gymContainerDiv.classList.add("col-4", "p-2", "gym-data", `id-${gym.id}`);
   gymContainerDiv.appendChild(h3Tag);

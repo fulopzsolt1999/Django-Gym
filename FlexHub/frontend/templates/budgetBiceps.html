@@ -8,20 +8,14 @@
 {% endblock title %}
 {% block content %}
    {% include 'navbar.html' %}
-   <div class="px-3" id="container">
+   <div class="px-3 mb-3 h-fit-content" id="container">
       <h1 class="text-center pt-3">Gym Kereső</h1>
       <div>
          <form class="row my-2 p-2">
-            <div class="col-12 col-lg-6" id="select-containers">
+            <div class="col-12 col-lg-6 w-fit-content" id="select-containers">
                <div class="row">
                   <div class="col-12 input-containers" id="select-city-container">
                      <input type="text" class="form-control" id="text-search" placeholder="Keresés...">
-                     <!-- <select id="city-select" class="form-select" aria-label="Default select example">
-                        <option selected id="city-option-text">Válassz egy várost:</option>
-                        {% for city in allCityData %}
-                           <option id="{{ city.name }}" value="{{ city.name }}">{{ city.name }}</option>
-                        {% endfor %}
-                     </select> -->
                   </div>
                   <div class="col-12 input-containers" id="select-price-container">
                      <select id="price-select" class="form-select" aria-label="Default select example">
@@ -34,9 +28,10 @@
             </div>
          </form>
       </div>
-      <div class="row m-auto" id="gyms-container">
+      <div class="row m-auto w-100 h-100" id="gyms-container">
       </div>
    </div>
+   {% include "footer.html" %}
 {% endblock content %}
 {% block js %}
    <script src="{% static 'js/budgetBiceps.js' %}"></script>
