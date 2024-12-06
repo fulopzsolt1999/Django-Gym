@@ -13,7 +13,7 @@ body {
 }
 
 form {
-   width: 50%;
+   width: 30rem;
    background-color: #1b263b;
    border-radius: 10px;
    display: flex;
@@ -25,7 +25,8 @@ form {
    box-shadow: 0px 0px 10px 5px rgba(0, 231, 201, 1);
 }
 
-form h1 {
+form h1,
+form h2 {
    border-bottom: #00e7c9 3px solid;
 }
 
@@ -74,30 +75,14 @@ form .btn:hover {
 
 @media screen and (max-width: 600px) {
    form {
-      width: 75%;
+      width: 90%;
    }
 }
 
 @media screen and (max-width: 500px) {
-   form h1 {
-      font-size: 1.5rem;
-   }
    #form-links {
-      font-size: 0.8rem;
       justify-content: center;
       align-items: center;
       gap: 0;
-   }
-}
-
-@media screen and (max-width: 400px) {
-   form {
-      width: 90%;
-   }
-   form h1 {
-      font-size: 1.3rem;
-   }
-   #form-links {
-      font-size: 0.7rem;
    }
 }

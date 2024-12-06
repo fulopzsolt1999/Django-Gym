@@ -18,7 +18,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -29,7 +28,6 @@ SECRET_KEY = 'django-insecure-ian=oc3d&y@kf&yh+6zl0#$flp0l#sn5rf%ve1s7@(7+7&2-(t
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -136,6 +134,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend/static/img/Exercises')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
+CSRF_COOKIE_HTTPONLY = True
+CSRF_USE_SESSIONS = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
