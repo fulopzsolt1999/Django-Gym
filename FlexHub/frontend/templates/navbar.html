@@ -38,34 +38,34 @@
             </li>
             {% endif %}
          </ul>
+         {% if user.is_authenticated %}
+            <div class="dropdown" id="profile-dropdown">
+               <button
+                  class="btn dropdown-toggle"
+                  type="button"
+                  id="profile-dropdown-button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <i class="fa-solid fa-user"></i>
+               </button>
+               <ul
+                  class="dropdown-menu pt-0 m-0"
+                  id="profile-dropdown-menu"
+                  aria-labelledby="profile-dropdown-button">
+                  <li>
+                     <a class="dropdown-item text-center" id="profile-username">
+                        Üdv, {{ user.username }}!
+                     </a>
+                  </li>
+                  <li>
+                     <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="dropdown-item text-center" id="logout">Kijelentkezés</button>
+                     </form>
+                  </li>
+               </ul>
+            </div>
+         {% endif %}
       </div>
    </div>
-   {% if user.is_authenticated %}
-   <div class="dropdown" id="profile-dropdown">
-      <button
-         class="btn dropdown-toggle"
-         type="button"
-         id="profile-dropdown-button"
-         data-bs-toggle="dropdown"
-         aria-expanded="false">
-         <i class="fa-solid fa-user"></i>
-      </button>
-      <ul
-         class="dropdown-menu pt-0 m-0"
-         id="profile-dropdown-menu"
-         aria-labelledby="profile-dropdown-button">
-         <li>
-            <a class="dropdown-item text-center" id="profile-username">
-               Üdv, {{ user.username }}!
-            </a>
-         </li>
-         <li>
-            <form action="{% url 'logout' %}" method="post">
-               {% csrf_token %}
-               <button type="submit" class="dropdown-item text-center" id="logout">Kijelentkezés</button>
-            </form>
-         </li>
-      </ul>
-   </div>
-   {% endif %}
 </nav>
