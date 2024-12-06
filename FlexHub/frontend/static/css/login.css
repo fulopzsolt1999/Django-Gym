@@ -1,8 +1,13 @@
+body {
+   overflow: hidden;
+}
+
 #container {
-   height: calc(100% - 89.6px);
+   height: calc(100% - 25.6px);
 }
 
 #form-container {
+   height: calc(100% - 64px);
    display: flex;
    justify-content: center;
 }
