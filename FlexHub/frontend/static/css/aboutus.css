@@ -1,7 +1,5 @@
 /* ××××× About us section styles ××××× */
 #about-us-container {
-   height: fit-content;
-   padding: 1.4rem 0;
    background: rgb(13, 27, 42);
    background: linear-gradient(
       0deg,
@@ -16,39 +14,21 @@
 
 #about-us,
 #about-project {
-   height: fit-content;
    width: 70%;
-   padding: 1rem;
    background-color: var(--secondary-bg);
    border-radius: 16px;
 }
 
 #about-us-title,
 #about-project-title {
-   width: 50%;
    border-bottom: var(--highlight) solid 5px;
-   margin: 1rem;
-   padding-bottom: 0.5rem;
 }
 
 #about-us-imgs {
-   padding: 1rem 0 0 1rem;
-   height: fit-content;
+   padding-right: 0.5rem;
    display: flex;
    justify-content: center;
    gap: 1rem;
-}
-
-#about-us-text {
-   font-size: 18px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-}
-
-#about-us-text p {
-   margin: 0;
-   padding: 0 1rem;
 }
 
 .card {
@@ -57,18 +37,23 @@
    border-radius: 10px;
 }
 
-.card-text i {
-   word-break: keep-all;
-}
-
-#about-us img {
-   height: auto;
-}
-
 .card-body {
    background-color: var(--secondary-text);
    border-bottom-right-radius: 10px;
    border-bottom-left-radius: 10px;
+}
+
+.card-text i {
+   word-break: keep-all;
+}
+
+#about-us-text {
+   padding-left: 0.5rem;
+   padding-right: 0;
+   font-size: 18px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 /* ××××× About project section styles ××××× */
@@ -78,8 +63,6 @@
 }
 
 #about-project-text {
-   margin: 0;
-   padding: 1rem;
    font-size: 18px;
    display: flex;
    justify-content: center;
@@ -99,36 +82,53 @@
       gap: 1rem;
    }
    #about-us-imgs {
-      padding: 1rem 0;
+      margin: 1rem 0 !important;
+      padding: 0 !important;
    }
-   #about-us-text,
+   #about-us-title,
+   #about-project-title {
+      width: 50% !important;
+   }
+   #about-us-text p {
+      padding: 0 1.5rem 1rem 1.5rem !important;
+   }
    #about-project-text {
       width: 90%;
-      margin: auto;
+      padding: 0 !important;
    }
 }
 
 @media screen and (max-width: 600px) {
-   #about-us-text,
-   #about-project-text {
-      padding: 0;
+   #about-us-imgs {
+      padding: 0 !important;
    }
-   .card {
-      width: 8rem;
+   #about-us-text p,
+   #about-project-text {
+      padding: 0.5rem 0 1rem 0 !important;
    }
    .card-body {
       padding: 0.5rem;
    }
 }
 
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 500px) {
    #about-us-title,
    #about-project-title {
-      width: calc(100% - 2rem);
+      width: 100%;
+      margin: 0.25rem 0 1rem 0;
+      font-size: 1.4rem;
    }
    #about-us-imgs {
+      padding: 0 !important;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+   }
+   .card {
+      width: 8rem;
+   }
+   #about-us-text,
+   #about-project-text {
+      font-size: 1rem;
    }
 }
