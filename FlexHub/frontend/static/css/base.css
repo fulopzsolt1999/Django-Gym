@@ -9,7 +9,6 @@
    --primary-text: #ffffff;
    --secondary-text: #c0c0c0;
    --highlight: #00e7c9;
-   --max-height: calc(100% - 1rem);
 }
 
 /* ××××× General styles ××××× */
@@ -40,10 +39,8 @@ p {
 }
 
 #container {
-   height: var(--max-height);
-   background: linear-gradient(180deg, rgb(40, 50, 130) 0%, rgba(9,9,121,1) 10%, rgba(10,14,98,1) 30%, rgba(11,17,86,1) 50%, rgba(27,38,59,1) 75%, rgba(13,27,42,1) 100%);
-   background-repeat: inherit;
-   background-size: cover;
+   height: calc(100% - 1rem);
+   background: linear-gradient(180deg, rgba(9,9,121,1) 0%, rgba(10,14,98,1) 25%, rgba(11,17,86,1) 50%, rgba(27,38,59,1) 75%, rgba(13,27,42,1) 100%);
 }
 
 #navbar {
