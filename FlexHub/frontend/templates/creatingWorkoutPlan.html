@@ -60,7 +60,7 @@
             {% if workoutPlans.exists %}
             <ol id="sortable">
                {% for exercise in workoutPlans %}
-                  {% if exercise.day == currentDay %}
+                  {% if exercise.day == currentDay and exercise.userName == user %}
                      <div class="ui-state-default show-exercises my-3" id="ex-{{exercise.id}}">
                         <li class="ps-3 pt-2">
                            <dl>

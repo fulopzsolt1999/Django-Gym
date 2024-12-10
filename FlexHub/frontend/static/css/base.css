@@ -189,6 +189,7 @@ p {
 
 /* ××××× Footer styles ××××× */
 footer {
+   clear:both;
    width: 100%;
    background-color: var(--secondary-text);
    color: #0d1b2a;

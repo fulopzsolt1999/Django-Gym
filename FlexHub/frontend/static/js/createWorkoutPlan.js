@@ -1,18 +1,3 @@
-async function fetchWorkoutsData() {
-   const response = await fetch("http://127.0.0.1:8000/getSerializedWorkoutPlansData");
-   const result = await response.json();
-   return result.map(gym => ({
-      id: gym.id,
-      userName: gym.userName,
-      day: gym.day,
-      muscleGroup: gym.muscleGroupName,
-      exercise: gym.exerciseName,
-      reps: gym.reps,
-      series: gym.series,
-      comment: gym.comment
-   }));
-}
-
 async function FetchExercisesData() {
    const response = await fetch("http://127.0.0.1:8000/getSerializedExercisesData");
    const result = await response.json();
@@ -77,61 +62,67 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       imgVideoContainer.removeAttribute("hidden");
    });
+
+   document.querySelector("#add-exercise").addEventListener("click", () => {
+      const addedDDValues = [
+         document.querySelector("#muscle-groups").value,
+         document.querySelector("#workout-plan-reps").value,
+         document.querySelector("#workout-plan-series").value,
+         document.querySelector("#comment").value
+      ]
+      const exercise = document.querySelector("#exercises").value;
+      const engExerciseNameInOne = exercise.split(" ").join("").split("(")[0];
+      
+      const div = document.createElement("div");
+      const li = document.createElement("li");
+      const dl = document.createElement("dl");
+      const dt = document.createElement("dt");
+      const button = document.createElement("button");
+   
+      dt.textContent = exercise;
+      dt.classList.add("border-bottom", "border-3", "mb-2");
+      dl.appendChild(dt);
+      let counter = 0;
+      addedDDValues.forEach(value => {
+         const dd = document.createElement("dd");
+         if (counter === 1) {
+            dd.textContent = `- ${value} szett`;
+         } else if (counter === 2) {
+            dd.textContent = `- ${value} ismétlés`;
+         } else {
+            dd.textContent = `- ${value}`;
+         }
+         dd.classList.add("ps-3");
+         dl.appendChild(dd);
+         counter++;
+      });
+   
+      li.classList.add("ps-3", "pt-2");
+      li.appendChild(dl);
+      
+      allExercises.forEach(ex => {
+         if (ex.name === exercise) {
+            button.setAttribute("onclick", `DeleteExercise('${ex.id}')`);
+         }
+      });
+      
+      button.type = "button";
+      button.textContent = "Törlés";
+      button.classList.add("btn", "btn-danger", "my-auto");
+      button.id = "delete-exercise-btn";
+   
+      div.className = "ui-state-default show-exercises my-3";
+      div.id = `ex-${engExerciseNameInOne}`;
+      div.appendChild(li);
+      div.appendChild(button);
+   
+      document.querySelector("#sortable").appendChild(div);
+   });
 });
 
 $(function() {
    $("#sortable").sortable();
    $("#sortable").disableSelection();
-});
-
-document.querySelector("#add-exercise").addEventListener("click", () => {
-   const addedDDValues = [
-      document.querySelector("#muscle-groups").value,
-      document.querySelector("#workout-plan-reps").value,
-      document.querySelector("#workout-plan-series").value,
-      document.querySelector("#comment").value
-   ]
-   const exercise = document.querySelector("#exercises").value;
-   const engExerciseNameInOne = exercise.split(" ").join("").split("(")[0];
-   
-   const div = document.createElement("div");
-   const li = document.createElement("li");
-   const dl = document.createElement("dl");
-   const dt = document.createElement("dt");
-   const button = document.createElement("button");
-
-   dt.textContent = exercise;
-   dt.classList.add("border-bottom", "border-3", "mb-2");
-   dl.appendChild(dt);
-   let counter = 0;
-   addedDDValues.forEach(value => {
-      const dd = document.createElement("dd");
-      if (counter === 1) {
-         dd.textContent = `- ${value} szett`;
-      } else if (counter === 2) {
-         dd.textContent = `- ${value} ismétlés`;
-      } else {
-         dd.textContent = `- ${value}`;
-      }
-      dd.classList.add("ps-3");
-      dl.appendChild(dd);
-      counter++;
-   });
-
-   li.classList.add("ps-3", "pt-2");
-   li.appendChild(dl);
-
-   button.type = "button";
-   button.textContent = "Törlés";
-   button.classList.add("btn", "btn-danger");
-   button.setAttribute("onclick", `DeleteExercise('${exercise.engExerciseNameInOne}')`);
-
-   div.className = "ui-state-default show-exercises my-3";
-   div.id = `ex-${engExerciseNameInOne}`;
-   div.appendChild(li);
-   div.appendChild(button);
-
-   document.querySelector("#sortable").appendChild(div);
 });
 
 function DeleteExercise(exerciseId) {
@@ -173,7 +164,7 @@ document.querySelector("#save-workout-plan").addEventListener("click", () => {
 function GetFetchableWorkoutExerciseData() {
    const workoutExercises = document.querySelectorAll("#sortable li dl");
    const result = [];
-   console.log(workoutExercises[0].textContent.trim().split("-").map(item => item.trim())[0]);
+   
    for (let i = 0; i < workoutExercises.length; i++) {
       result.push({
          user_name: document.querySelector("#profile-username").textContent.replace(/\s|\!/g, '').split(",")[1],

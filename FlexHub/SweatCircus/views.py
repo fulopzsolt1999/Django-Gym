@@ -51,6 +51,7 @@ def CreateWorkoutPlan(request):
 
    if request.method == "POST":
       exercisesJson = json.loads(request.body.decode('utf-8'))
+      previousWorkoutPlan = workoutPlans.filter(userName=User.objects.get(username=exercisesJson[0]["user_name"]), day=days.get(name=exercisesJson[0]["day"]))
       newWorkoutPlan = []
       for exercise in exercisesJson:
          userName = User.objects.get(username=exercise["user_name"])
@@ -62,8 +63,9 @@ def CreateWorkoutPlan(request):
          comment = exercise["comment"]
          if exerciseName not in newWorkoutPlan:
             newWorkoutPlan.append(WorkoutPlans(userName=userName, day=day, muscleGroupName=muscleGroup, exerciseName=exerciseName, series=series, reps=reps, comment=comment))
-      previousWorkoutPlan = workoutPlans.filter(userName=User.objects.get(username=exercisesJson[0]["user_name"]), day=newWorkoutPlan[0].day)
+  
       previousWorkoutPlan.delete()
+
       for workoutPlan in newWorkoutPlan:
          workoutPlan.save()
 

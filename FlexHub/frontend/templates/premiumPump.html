@@ -41,7 +41,7 @@
                      </thead>
                      <tbody>
                         {% for workoutPlan in workoutPlans %}
-                           {% if workoutPlan.day == day %}
+                           {% if workoutPlan.day == day and workoutPlan.userName == user %}
                               <tr id="{{ workoutPlan.id }}">
                                  <td>{{ workoutPlan.exerciseName }}</td>
                                  <td>{{ workoutPlan.series }}</td>
