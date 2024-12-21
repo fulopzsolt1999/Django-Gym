@@ -174,7 +174,7 @@ function GetFetchableWorkoutExerciseData() {
          series: workoutExercises[i].textContent.trim().split("-").map(item => item.trim())[2].split(" ")[0],
          reps: workoutExercises[i].textContent.trim().split("-").map(item => item.trim())[3].split(" ")[0],
          comment: workoutExercises[i].textContent.trim().split("-").map(item => item.trim())[4]
-      })
+      });
    }
    return result;
 }

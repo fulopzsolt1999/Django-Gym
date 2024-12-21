@@ -57,7 +57,7 @@ def CreateWorkoutPlan(request):
          userName = User.objects.get(username=exercise["user_name"])
          day = days.get(name=exercise["day"])
          muscleGroup = muscleGroups.get(name=exercise["muscle_group_name"])
-         exerciseName = exercises.get(name=exercise["exercise_name"]) 
+         exerciseName = exercises.get(name=exercise["exercise_name"])
          series = exercise["series"]
          reps = exercise["reps"]
          comment = exercise["comment"]
