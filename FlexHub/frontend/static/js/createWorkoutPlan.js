@@ -100,12 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       li.classList.add("ps-3", "pt-2");
       li.appendChild(dl);
       
-      allExercises.forEach(ex => {
-         if (ex.name === exercise) {
-            button.setAttribute("onclick", `DeleteExercise('${ex.id}')`);
-         }
-      });
-      
+      button.setAttribute("onclick", `DeleteExercise('${engExerciseNameInOne}')`);
       button.type = "button";
       button.textContent = "Törlés";
       button.classList.add("btn", "btn-danger", "my-auto");
