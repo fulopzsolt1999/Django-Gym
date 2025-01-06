@@ -10,7 +10,7 @@
    <div id="container">
       {% include 'navbar.html' %}
       <div class="container">
-         <h1 class="text-center my-3">Edzés terv</h1>
+         <h1 class="text-center">Edzés terv</h1>
          <div id="week">
             {% for day in days %}
                <div class="days" id="{{ day.name }}">
@@ -27,7 +27,7 @@
                            <label class="form-check-label" for="is-rest-day">Pihenőnap</label>
                         </h4>
                      </div>
-                     <button type="submit" id="btn-{{ day.name }}" class="btn btn-primary mb-2">Gyakorlatok módosítása/hozzáadása</button>
+                     <button type="submit" id="btn-{{ day.name }}" class="btn btn-primary mb-2 ms-3">Gyakorlatok módosítása/hozzáadása</button>
                   </form>
                   <table id="table-{{ day.name }}" class="table table-striped table-hover table-bordered table-dark text-center my-3">
                      <thead>
@@ -47,10 +47,12 @@
                                  <td>{{ workoutPlan.series }}</td>
                                  <td>{{ workoutPlan.reps }}</td>
                                  <td>{{ workoutPlan.comment }}</td>
-                                 <td class="exercise-image">
-                                    <i class="fa-regular fa-image"></i>
-                                    <div class="bubble">
-                                       <img src="../static/img/Exercises/{{ workoutPlan.exerciseName.image }}" alt="{{ workoutPlan.exerciseName }} kép" width="200" height="150">
+                                 <td>
+                                    <div class="exercise-image">
+                                       <i class="fa-regular fa-image"></i>
+                                       <div class="bubble">
+                                          <img src="../static/img/Exercises/{{ workoutPlan.exerciseName.image }}" alt="{{ workoutPlan.exerciseName }} kép" width="200" height="150">
+                                       </div>
                                     </div>
                                  </td>
                               </tr>
@@ -62,6 +64,7 @@
             {% endfor %}
          </div>
       </div>
+      {% include "footer.html" %}
    </div>
 {% endblock content %}
 {% block js %}
