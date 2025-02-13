@@ -142,8 +142,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-mail = os.environ.get('MAIL')
-mail_pw = os.environ.get('MAIL_PASSWORD')
+mail = os.environ.get('EMAIL')
+mail_pw = os.environ.get('EMAIL_PASSWORD')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
